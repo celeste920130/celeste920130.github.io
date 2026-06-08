@@ -249,13 +249,32 @@ h1 {
   margin-bottom: 28px;
 }
 
+.project-scroll-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  cursor: grab;
+  padding-bottom: 4px;
+}
+
+.project-scroll-wrap::-webkit-scrollbar {
+  display: none;
+}
+
+.project-scroll-wrap.is-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+}
+
 .project-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  display: flex;
   gap: 18px;
 }
 
 .project-card {
+  flex: 0 0 320px;
+  scroll-snap-align: start;
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -305,6 +324,10 @@ h1 {
 
 .visual-c {
   background-color: rgba(45, 127, 134, 0.22);
+}
+
+.visual-d {
+  background-color: rgba(229, 9, 20, 0.16);
 }
 
 .project-body {
@@ -517,10 +540,13 @@ h1 {
     font-size: 2.55rem;
   }
 
-  .project-grid,
   .split,
   .timeline-item {
     grid-template-columns: 1fr;
+  }
+
+  .project-card {
+    flex: 0 0 280px;
   }
 
   .project-body p:not(.project-type) {
@@ -625,6 +651,11 @@ h1 {
   #about,
   #contact {
     scroll-margin-top: 110px;
+  }
+
+  /* ── Projects carousel ── */
+  .project-card {
+    flex: 0 0 240px;
   }
 
   /* ── Form ── */

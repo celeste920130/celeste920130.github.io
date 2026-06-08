@@ -58,3 +58,31 @@ function drawBackground() {
 
 window.addEventListener("resize", resizeCanvas);
 resizeCanvas();
+
+// Drag-to-scroll for project carousel
+const scrollWrap = document.querySelector(".project-scroll-wrap");
+if (scrollWrap) {
+  let isDown = false;
+  let startX = 0;
+  let scrollLeft = 0;
+
+  scrollWrap.addEventListener("mousedown", (e) => {
+    isDown = true;
+    startX = e.pageX - scrollWrap.offsetLeft;
+    scrollLeft = scrollWrap.scrollLeft;
+    scrollWrap.classList.add("is-dragging");
+  });
+
+  document.addEventListener("mouseup", () => {
+    if (!isDown) return;
+    isDown = false;
+    scrollWrap.classList.remove("is-dragging");
+  });
+
+  scrollWrap.addEventListener("mousemove", (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - scrollWrap.offsetLeft;
+    scrollWrap.scrollLeft = scrollLeft - (x - startX) * 1.4;
+  });
+}
