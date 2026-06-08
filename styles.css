@@ -20,6 +20,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
@@ -401,6 +402,15 @@ h1 {
   font-weight: 800;
   text-decoration-thickness: 2px;
   text-underline-offset: 5px;
+  word-break: break-all;
+}
+
+/* Sticky header offset for anchor links */
+#projects,
+#experience,
+#about,
+#contact {
+  scroll-margin-top: 80px;
 }
 
 .nav-social {
@@ -596,6 +606,21 @@ h1 {
     width: 100%;
   }
 
+  /* ── Section heading: stack vertically on mobile ── */
+  .section-heading {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  /* ── Anchor scroll offset (header is taller on mobile due to wrap) ── */
+  #projects,
+  #experience,
+  #about,
+  #contact {
+    scroll-margin-top: 110px;
+  }
+
   /* ── Form ── */
   .form-row {
     grid-template-columns: 1fr;
@@ -652,6 +677,7 @@ h1 {
 
 .form-group input,
 .form-group textarea {
+  width: 100%;
   padding: 10px 14px;
   border: 1px solid var(--line);
   border-radius: 8px;
