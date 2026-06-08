@@ -513,48 +513,79 @@ h1 {
 }
 
 @media (max-width: 560px) {
+  /* ── Header: 兩行排列，第一行 brand + icons，第二行 nav ── */
   .btn-resume {
     display: none;
   }
 
   .site-header {
-    align-items: flex-start;
-    gap: 8px;
-    padding: 14px 0;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 0;
   }
 
   .brand {
-    font-size: 0.98rem;
+    order: 1;
+    font-size: 0.95rem;
+  }
+
+  .nav-social {
+    order: 2;
+    margin-left: auto;
+    gap: 2px;
   }
 
   .site-nav {
-    gap: 2px;
+    order: 3;
     width: 100%;
+    gap: 0;
+    margin-top: 4px;
     overflow-x: auto;
-    justify-content: flex-end;
+    justify-content: flex-start;
+    scrollbar-width: none;
+  }
+
+  .site-nav::-webkit-scrollbar {
+    display: none;
   }
 
   .site-nav a {
-    min-width: 38px;
-    padding: 7px 6px;
-    font-size: 0.78rem;
+    min-width: 0;
+    padding: 7px 10px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 
+  /* ── Typography ── */
   h1 {
-    font-size: 2.35rem;
+    font-size: 2rem;
   }
 
   .intro h2,
   .section-heading h2,
   .split h2,
   .contact h2 {
-    font-size: 2rem;
+    font-size: 1.75rem;
   }
 
   .hero-text {
-    font-size: 1rem;
+    font-size: 0.97rem;
   }
 
+  /* ── Spacing ── */
+  .hero {
+    padding: 36px 0 48px;
+    gap: 20px;
+  }
+
+  .section {
+    padding: 48px 0;
+  }
+
+  /* ── Buttons & actions ── */
   .hero-actions,
   .contact-links {
     flex-direction: column;
@@ -565,12 +596,18 @@ h1 {
     width: 100%;
   }
 
-  .section {
-    padding: 68px 0;
-  }
-
+  /* ── Form ── */
   .form-row {
     grid-template-columns: 1fr;
+  }
+
+  .contact-form button.button {
+    width: 100%;
+  }
+
+  /* ── Case study ── */
+  .cs-hero h1 {
+    font-size: 1.9rem;
   }
 
   .cs-problem-grid {
@@ -582,8 +619,9 @@ h1 {
     gap: 8px;
   }
 
-  .cs-hero h1 {
-    font-size: 2.2rem;
+  .cs-features-grid,
+  .cs-outcomes-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -859,6 +897,10 @@ h1 {
 @media (max-width: 860px) {
   .cs-hero h1 {
     font-size: 2.8rem;
+  }
+
+  .cs-page .section h2 {
+    font-size: 2rem;
   }
 
   .cs-features-grid,
