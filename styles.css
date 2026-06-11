@@ -169,7 +169,7 @@ h3 {
 h1 {
   max-width: 780px;
   margin-bottom: 24px;
-  font-size: 4.85rem;
+  font-size: 4.2rem;
   font-weight: 900;
 }
 
@@ -230,7 +230,7 @@ h1 {
 .split h2,
 .contact h2 {
   margin-bottom: 18px;
-  font-size: 3.45rem;
+  font-size: 3rem;
   font-weight: 900;
 }
 
@@ -547,14 +547,14 @@ h1 {
 
   h1 {
     max-width: 680px;
-    font-size: 3.45rem;
+    font-size: 3rem;
   }
 
   .intro h2,
   .section-heading h2,
   .split h2,
   .contact h2 {
-    font-size: 2.55rem;
+    font-size: 2.3rem;
   }
 
   .split,
@@ -620,14 +620,14 @@ h1 {
 
   /* ── Typography ── */
   h1 {
-    font-size: 2rem;
+    font-size: 1.85rem;
   }
 
   .intro h2,
   .section-heading h2,
   .split h2,
   .contact h2 {
-    font-size: 1.75rem;
+    font-size: 1.6rem;
   }
 
   .hero-text {
@@ -686,7 +686,7 @@ h1 {
 
   /* ── Case study ── */
   .cs-hero h1 {
-    font-size: 1.9rem;
+    font-size: 1.75rem;
   }
 
   .cs-finding-item {
@@ -816,7 +816,7 @@ code {
 /* ─── Case Study Page ─── */
 
 .cs-page .section h2 {
-  font-size: 2.4rem;
+  font-size: 2.1rem;
   font-weight: 900;
   margin-bottom: 18px;
 }
@@ -842,7 +842,7 @@ code {
 
 .cs-hero h1 {
   max-width: none;
-  font-size: 3.8rem;
+  font-size: 3.2rem;
   margin-bottom: 16px;
 }
 
@@ -1113,11 +1113,11 @@ code {
 
 @media (max-width: 860px) {
   .cs-hero h1 {
-    font-size: 2.8rem;
+    font-size: 2.4rem;
   }
 
   .cs-page .section h2 {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 
   .cs-features-grid,
