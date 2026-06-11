@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="From Views to Learning – Rethinking how NTU OpenCourseWare measures whether a course video actually works. A case study by Celeste Shih." />
+    <title>From Views to Learning | Celeste Shih</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="cs-page">
+    <canvas id="work-canvas" aria-hidden="true"></canvas>
+
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Back to portfolio">Celeste Shih</a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="index.html#projects">Work</a>
+        <a href="index.html#experience">Experience</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <div class="nav-social">
+        <a href="https://www.linkedin.com/in/celeste-shih-a97037283/" target="_blank" rel="noreferrer" aria-label="LinkedIn" class="nav-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://github.com/celeste920130" target="_blank" rel="noreferrer" aria-label="GitHub" class="nav-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+        </a>
+        <a href="resume.pdf" download class="button primary btn-resume">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Resume
+        </a>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="cs-hero">
+        <a href="index.html" class="cs-back-link">← All Projects</a>
+        <p class="eyebrow">Python · Excel · YouTube Analytics</p>
+        <h1>From Views to Learning</h1>
+        <p class="cs-hero-subtitle">
+          Rethinking how NTU's OpenCourseWare measures whether a course video actually works.
+        </p>
+        <div class="cs-meta-row">
+          <div>
+            <p class="cs-meta-label">Data Source</p>
+            <p class="cs-meta-value">NTU OCW YouTube Analytics</p>
+          </div>
+          <div>
+            <p class="cs-meta-label">Role</p>
+            <p class="cs-meta-value">Data Analysis Assistant</p>
+          </div>
+          <div>
+            <p class="cs-meta-label">Tools</p>
+            <p class="cs-meta-value">Python · Excel · YouTube Analytics</p>
+          </div>
+          <div>
+            <p class="cs-meta-label">Scope</p>
+            <p class="cs-meta-value">100+ Videos · 36M+ Views</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section cs-text-section" aria-labelledby="cs-context">
+        <p class="section-kicker">Context</p>
+        <h2 id="cs-context">The Problem with View Count</h2>
+        <p>
+          NTU's OpenCourseWare channel has <strong>36M+ cumulative views</strong>, but the academic office judged each course video almost entirely by view count. That's a vanity metric: many viewers click the first episode and drop off within the first 1%, so a high-view video isn't one people actually learn from. I set out to define a better measure of an "effective" course video — and turn it into content decisions.
+        </p>
+      </section>
+
+      <section class="section cs-text-section" aria-labelledby="cs-approach">
+        <p class="section-kicker">Approach</p>
+        <h2 id="cs-approach">Moving Past View Count</h2>
+        <p>
+          Using Python and Excel on YouTube Analytics across 100+ videos, I moved past view count to engagement metrics — retention at the <strong>1% / 50% / 70% / 90%</strong> marks, completion rate, average view duration and percentage — then segmented behavior by course type and audience. The goal was to understand not just who clicked, but who stayed and learned.
+        </p>
+      </section>
+
+      <section class="section cs-text-section" aria-labelledby="cs-findings">
+        <p class="section-kicker">Key Findings</p>
+        <h2 id="cs-findings">What the Data Shows</h2>
+        <div class="cs-findings-list">
+          <div class="cs-finding-item">
+            <span class="cs-finding-num">01</span>
+            <div>
+              <h3>View count overstates impact</h3>
+              <p>
+                Viewing drops sharply after the first <span class="cs-stat-inline">1%</span> mark, and the 50–90% retention curves nearly converge. "Most-viewed" videos are mostly first episodes people sampled, not finished — high view counts signal discovery, not learning.
+              </p>
+            </div>
+          </div>
+          <div class="cs-finding-item">
+            <span class="cs-finding-num">02</span>
+            <div>
+              <h3>Course type drives very different viewing behavior</h3>
+              <p>
+                Humanities courses (~2-hour, sequential) shed viewers fast then stabilize to a small loyal core by episode 5. STEM courses (~50-min, topic-based) show selective, unit-by-unit viewing with higher per-episode completion — two completely different engagement patterns requiring different content strategies.
+              </p>
+            </div>
+          </div>
+          <div class="cs-finding-item">
+            <span class="cs-finding-num">03</span>
+            <div>
+              <h3>Audiences differ sharply by subject</h3>
+              <p>
+                Humanities skews significantly older (<span class="cs-stat-inline">55–64</span> the largest age band, <span class="cs-stat-inline">70%</span> male); STEM skews young (<span class="cs-stat-inline">76%</span> aged 18–24, <span class="cs-stat-inline">83%</span> male). These are essentially two different products for two different users — content design and distribution should reflect that.
+              </p>
+            </div>
+          </div>
+          <div class="cs-finding-item">
+            <span class="cs-finding-num">04</span>
+            <div>
+              <h3>Playlists are an underused growth lever</h3>
+              <p>
+                Playlists account for <span class="cs-stat-inline">30–46%</span> of views — a major discovery path that operates independently of the algorithm. Optimizing playlist structure is a high-leverage, low-cost intervention that current content decisions largely ignore.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section cs-text-section" aria-labelledby="cs-recommendation">
+        <p class="section-kicker">Recommendation</p>
+        <h2 id="cs-recommendation">Measure What Actually Matters</h2>
+        <div class="cs-recs-list">
+          <div class="cs-rec-item">
+            <h3>1 — Replace view count with an engagement-based scorecard</h3>
+            <p>
+              Adopt completion rate, retention at key marks (50% / 90%), and average view percentage as the primary measures of video effectiveness. Raw view count should be a secondary signal for discovery reach, not a quality indicator. This reframes what a "successful" video looks like internally.
+            </p>
+          </div>
+          <div class="cs-rec-item">
+            <h3>2 — Design content to match course-type behavior</h3>
+            <p>
+              Humanities: segment long sequential lectures into shorter standalone units to reduce early drop-off and serve the older, committed audience that already self-selects for depth. STEM: lean into the topic-based structure that already works — viewers are coming for specific units, not cover-to-cover completion.
+            </p>
+          </div>
+          <div class="cs-rec-item">
+            <h3>3 — Invest in playlist structure as a discovery channel</h3>
+            <p>
+              With 30–46% of views originating from playlists, intentional playlist curation and sequencing is a measurable growth lever. Treat playlists as a product surface, not an afterthought — ordered series, curated topic bundles, and cross-course playlists can materially improve both reach and retention.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section cs-text-section" aria-labelledby="cs-methodology">
+        <p class="section-kicker">Methodology & Role</p>
+        <h2 id="cs-methodology">How the Analysis Was Done</h2>
+        <p>
+          Data was exported from the <strong>NTU OCW YouTube Analytics</strong> dashboard covering 100+ course videos. Python was used to clean, merge, and compute derived metrics (completion rate, retention at threshold marks, average view duration %). Excel was used for segmentation, pivot analysis, and visualization prototyping.
+        </p>
+        <p>
+          Retention curves were constructed per video by pulling audience-retention data at the 1%, 50%, 70%, and 90% playback marks. Videos were then grouped by course type (humanities vs. STEM) and audience demographic bands to surface behavioral differences. The insights directly informed content-design recommendations delivered to the NTU OCW academic team — including the proposal to retire view count as a primary KPI and replace it with the engagement scorecard.
+        </p>
+
+        <ul class="skill-list" aria-label="Tools and methods" style="margin-top: 28px;">
+          <li>Python</li>
+          <li>Excel</li>
+          <li>YouTube Analytics</li>
+          <li>Retention Curve Analysis</li>
+          <li>Audience Segmentation</li>
+          <li>Content Strategy</li>
+          <li>Ed-tech Analytics</li>
+        </ul>
+      </section>
+
+      <section class="section cs-text-section">
+        <p class="section-kicker">Next</p>
+        <h2>Explore More Work</h2>
+        <div class="hero-actions">
+          <a href="index.html#projects" class="button primary">All Projects</a>
+          <a href="index.html#contact" class="button secondary">Get in Touch</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© 2026 Celeste Shih.</p>
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/in/celeste-shih-a97037283/" target="_blank" rel="noreferrer" aria-label="LinkedIn" class="nav-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://github.com/celeste920130" target="_blank" rel="noreferrer" aria-label="GitHub" class="nav-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+        </a>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
