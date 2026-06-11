@@ -672,6 +672,11 @@ h1 {
     font-size: 1.9rem;
   }
 
+  .cs-finding-item {
+    flex-direction: column;
+    gap: 8px;
+  }
+
   .cs-problem-grid {
     grid-template-columns: 1fr;
   }
@@ -779,6 +784,16 @@ h1 {
 .form-group textarea[aria-invalid="true"] {
   border-color: #b91c1c;
   box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.1);
+}
+
+/* ─── Inline code ─── */
+
+code {
+  font-family: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+  font-size: 0.88em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(21, 32, 28, 0.07);
 }
 
 /* ─── Case Study Page ─── */
@@ -955,6 +970,128 @@ h1 {
   font-size: 0.88rem;
   line-height: 1.55;
   margin: 0;
+}
+
+/* ─── Olist Case Study — Tableau, Findings, Recs, SQL ─── */
+
+.cs-tableau-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.76);
+  margin-top: 8px;
+}
+
+.cs-findings-list {
+  display: grid;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.cs-finding-item {
+  display: flex;
+  gap: 20px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.cs-finding-num {
+  flex-shrink: 0;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--blue);
+  padding-top: 3px;
+}
+
+.cs-finding-item h3 {
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+}
+
+.cs-finding-item p {
+  color: var(--muted);
+  margin: 0;
+}
+
+.cs-stat-inline {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  color: var(--blue-deep);
+}
+
+.cs-recs-list {
+  display: grid;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.cs-rec-item {
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--blue);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.cs-rec-item h3 {
+  font-size: 1.05rem;
+  margin-bottom: 8px;
+}
+
+.cs-rec-item p {
+  color: var(--muted);
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.cs-sql {
+  margin-top: 28px;
+}
+
+.cs-sql-label {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: 8px;
+}
+
+.cs-sql pre {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 0;
+  padding: 20px 24px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #1a1f2e;
+  color: #cbd5e1;
+  font-family: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+  font-size: 0.84rem;
+  line-height: 1.65;
+}
+
+.cs-sql pre code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+.cs-github-link {
+  margin-top: 28px;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.cs-github-link a {
+  font-weight: 700;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
 }
 
 @media (max-width: 860px) {
