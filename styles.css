@@ -115,8 +115,8 @@ main {
   align-items: flex-start;
   justify-content: space-between;
   gap: 56px;
-  min-height: calc(100vh - 88px);
-  padding: 7vh 0 9vh;
+  min-height: 65vh;
+  padding: 6vh 0 7vh;
 }
 
 .hero-photo-wrap {
