@@ -112,7 +112,7 @@ main {
 
 .hero {
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 56px;
   min-height: calc(100vh - 88px);
