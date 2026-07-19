@@ -399,6 +399,13 @@ h1 {
   text-transform: uppercase;
 }
 
+.role-context {
+  margin-top: 4px;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--muted);
+}
+
 .timeline-item ul {
   display: grid;
   gap: 8px;
