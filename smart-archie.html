@@ -12,6 +12,32 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
+    <style>
+      .cs-screenshot {
+        display: block;
+        width: 100%;
+        margin-top: 20px;
+        border-radius: 8px;
+        border: 1px solid var(--line);
+        box-shadow: 0 8px 28px rgba(21, 32, 28, 0.1);
+        object-fit: cover;
+      }
+      .cs-screenshot-caption {
+        margin-top: 8px;
+        font-size: 0.82rem;
+        color: var(--muted);
+        font-style: italic;
+      }
+      .cs-screenshot-pair {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-top: 20px;
+      }
+      @media (max-width: 640px) {
+        .cs-screenshot-pair { grid-template-columns: 1fr; }
+      }
+    </style>
   </head>
   <body class="cs-page">
     <canvas id="work-canvas" aria-hidden="true"></canvas>
@@ -44,7 +70,7 @@
         <p class="eyebrow">AI Product / Cloud Architecture</p>
         <h1>Smart Archie</h1>
         <p class="cs-hero-subtitle">
-          An AI-driven cloud architecture assistant that generates precise infrastructure diagrams through dialogue and survey inputs—helping enterprise teams cut weeks off migration planning.
+          From requirements to cloud architecture diagrams in one session, through dialogue and structured surveys.
         </p>
         <div class="cs-meta-row">
           <div>
@@ -70,34 +96,13 @@
         <p class="section-kicker">Overview</p>
         <h2 id="cs-overview">What is Smart Archie?</h2>
         <p>
-          Smart Archie is an internal AI tool built at Cathay Financial Holdings to accelerate cloud adoption across enterprise business units. As the organization embarked on a multi-year cloud migration initiative, teams needed a faster and more accessible way to plan and communicate infrastructure decisions.
+          Smart Archie is an internal AI tool built at Cathay Financial Holdings to accelerate cloud adoption across enterprise business units. As the organization embarked on a cloud migration initiative, teams needed a faster and more accessible way to translate requirements into architecture decisions, without weeks of back-and-forth between architects and business stakeholders.
         </p>
         <p>
-          The tool collects requirements through structured surveys and conversational dialogue, then automatically generates cloud architecture diagrams mapped to AWS and GCP services—reducing planning cycles from weeks of back-and-forth to a single working session.
+          The tool collects requirements through structured surveys and conversational dialogue, then automatically generates cloud architecture diagrams mapped to AWS and GCP services, reducing planning cycles into a single working session.
         </p>
-      </section>
-
-      <section class="section cs-text-section" aria-labelledby="cs-problem">
-        <p class="section-kicker">Problem</p>
-        <h2 id="cs-problem">The Challenge</h2>
-        <div class="cs-problem-grid">
-          <div class="cs-problem-item">
-            <h3>Communication gaps</h3>
-            <p>Business stakeholders struggled to articulate technical requirements to cloud architects, creating review cycles that delayed planning by weeks.</p>
-          </div>
-          <div class="cs-problem-item">
-            <h3>Fragmented service knowledge</h3>
-            <p>With 45+ relevant AWS and GCP services, teams lacked a unified reference to evaluate which services best matched their workloads and compliance requirements.</p>
-          </div>
-          <div class="cs-problem-item">
-            <h3>Slow iteration</h3>
-            <p>Architecture revisions were entirely manual, making it costly to explore multiple design options before committing to a migration path.</p>
-          </div>
-          <div class="cs-problem-item">
-            <h3>Specialist dependency</h3>
-            <p>Architecture planning was gated behind specialist knowledge, limiting broader team participation in cloud strategy decisions.</p>
-          </div>
-        </div>
+        <img src="sa-editor.png" alt="Smart Archie main interface: architecture diagram editor with AI chatbot panel" class="cs-screenshot" />
+        <p class="cs-screenshot-caption">The main workspace — architecture diagram on the left, AI chatbot panel on the right for iterative refinement.</p>
       </section>
 
       <section class="section cs-text-section" aria-labelledby="cs-role">
@@ -138,6 +143,8 @@
               <p>
                 Identified key pain points through usability testing and stakeholder interviews with non-technical users. Coordinated targeted UX fixes that shipped in the V0.4.1 product update—improving onboarding flow completion rates among first-time users.
               </p>
+              <img src="sa-feedback.png" alt="User interview feedback consolidation table" class="cs-screenshot" />
+              <p class="cs-screenshot-caption">Consolidated user interview feedback — requirements prioritized by module, requestor, and target version.</p>
             </div>
           </div>
         </div>
@@ -152,24 +159,30 @@
             <p>
               Users describe workloads and goals in plain language. Smart Archie extracts structured technical requirements through guided dialogue, removing the dependency on specialist vocabulary.
             </p>
+            <img src="sa-templates.png" alt="Smart Archie fast mode — pre-built architecture template gallery" class="cs-screenshot" />
+            <p class="cs-screenshot-caption">Fast mode offers pre-built templates for common cloud scenarios — an alternative entry point for users who prefer to start from a familiar pattern rather than a blank survey.</p>
           </div>
           <div class="cs-feature-card">
             <h3>Survey-Based Validation</h3>
             <p>
               A structured survey ensures completeness of requirements before diagram generation, systematically catching missing information that would otherwise cause revision cycles.
             </p>
+            <img src="sa-survey.png" alt="Smart Archie general mode survey — cloud platform selection step" class="cs-screenshot" />
           </div>
           <div class="cs-feature-card">
             <h3>Automated Diagram Generation</h3>
             <p>
               Maps validated requirements to AWS and GCP services and renders standards-compliant architecture diagrams—turning hours of manual drafting into near-instant output.
             </p>
+            <img src="sa-diagram-gen.png" alt="Smart Archie generated cloud architecture diagram with AI chatbot panel" class="cs-screenshot" />
           </div>
           <div class="cs-feature-card">
             <h3>Iterative Refinement</h3>
             <p>
               Teams can adjust inputs and regenerate diagrams immediately, enabling rapid exploration of multiple architecture alternatives before committing to a migration path.
             </p>
+            <img src="sa-mode-select.png" alt="Smart Archie mode selection — General mode vs Fast mode" class="cs-screenshot" />
+            <p class="cs-screenshot-caption">Users choose their entry mode based on intent — guided survey for new requirements, or fast mode to quickly adapt an existing template to their context.</p>
           </div>
         </div>
       </section>
@@ -206,6 +219,14 @@
           <li>Product Roadmapping</li>
           <li>Cloud Architecture</li>
         </ul>
+      </section>
+
+      <section class="section cs-text-section">
+        <p class="section-kicker">Note</p>
+        <h2>On the Screenshots</h2>
+        <p style="color: var(--muted); font-size: 0.95rem;">
+          All screenshots shown in this case study have been reviewed prior to publishing. Confidential information has been removed or obscured. The visuals reflect UI flows and research methodology only.
+        </p>
       </section>
 
       <section class="section cs-text-section">

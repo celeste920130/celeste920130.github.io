@@ -59,8 +59,35 @@ function drawBackground() {
 window.addEventListener("resize", resizeCanvas);
 resizeCanvas();
 
-// Drag-to-scroll for project carousel
+// Arrow buttons for project carousel
 const scrollWrap = document.querySelector(".project-scroll-wrap");
+const btnLeft = document.querySelector(".carousel-btn-left");
+const btnRight = document.querySelector(".carousel-btn-right");
+
+function updateCarouselBtns() {
+  if (!scrollWrap || !btnLeft || !btnRight) return;
+  btnLeft.hidden = scrollWrap.scrollLeft <= 0;
+  btnRight.hidden = scrollWrap.scrollLeft + scrollWrap.clientWidth >= scrollWrap.scrollWidth - 1;
+}
+
+if (scrollWrap && btnLeft && btnRight) {
+  btnLeft.hidden = true;
+  btnRight.hidden = false;
+
+  btnLeft.addEventListener("click", () => {
+    scrollWrap.scrollBy({ left: -340, behavior: "smooth" });
+  });
+
+  btnRight.addEventListener("click", () => {
+    scrollWrap.scrollBy({ left: 340, behavior: "smooth" });
+  });
+
+  scrollWrap.addEventListener("scroll", updateCarouselBtns, { passive: true });
+  window.addEventListener("resize", updateCarouselBtns);
+  updateCarouselBtns();
+}
+
+// Drag-to-scroll for project carousel
 if (scrollWrap) {
   let isDown = false;
   let startX = 0;

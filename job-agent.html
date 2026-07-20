@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Job Agent – A self-hosted AI internship intelligence system. A case study by Celeste Shih." />
+    <title>Job Agent Case Study | Celeste Shih</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .cs-arch-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin-top: 8px;
+        padding: 32px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.76);
+      }
+
+      .cs-arch-wrap .mermaid svg {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+      }
+
+      .cs-decision-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 8px;
+        font-size: 0.92rem;
+      }
+
+      .cs-decision-table th {
+        padding: 10px 16px;
+        text-align: left;
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 0.78rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--blue);
+        border-bottom: 2px solid var(--line);
+      }
+
+      .cs-decision-table td {
+        padding: 12px 16px;
+        vertical-align: top;
+        border-bottom: 1px solid var(--line);
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .cs-decision-table td:first-child {
+        color: var(--ink);
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .cs-score-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+        margin-top: 8px;
+      }
+
+      .cs-score-card {
+        padding: 24px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.76);
+      }
+
+      .cs-score-card h3 {
+        font-size: 0.92rem;
+        font-family: "Space Grotesk", sans-serif;
+        color: var(--blue-deep);
+        margin-bottom: 6px;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+      }
+
+      .cs-score-card p {
+        color: var(--muted);
+        font-size: 0.88rem;
+        margin: 0;
+        line-height: 1.55;
+      }
+
+      .cs-callout {
+        margin-top: 24px;
+        padding: 20px 24px;
+        border-left: 3px solid var(--blue);
+        border-radius: 0 8px 8px 0;
+        background: var(--blue-soft);
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: var(--blue-deep);
+      }
+
+      .cs-filter-stages {
+        display: grid;
+        gap: 12px;
+        margin-top: 8px;
+      }
+
+      .cs-filter-stage {
+        display: flex;
+        gap: 20px;
+        padding: 20px 24px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.72);
+        align-items: flex-start;
+      }
+
+      .cs-filter-badge {
+        flex-shrink: 0;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 0.76rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        margin-top: 2px;
+      }
+
+      .badge-free {
+        background: rgba(47, 107, 79, 0.12);
+        color: var(--fern);
+        border: 1px solid rgba(47, 107, 79, 0.25);
+      }
+
+      .badge-llm {
+        background: rgba(37, 99, 235, 0.1);
+        color: var(--blue-deep);
+        border: 1px solid rgba(37, 99, 235, 0.2);
+      }
+
+      .cs-filter-stage h3 {
+        font-size: 1rem;
+        margin-bottom: 4px;
+      }
+
+      .cs-filter-stage p {
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin: 0;
+        line-height: 1.55;
+      }
+
+      @media (max-width: 860px) {
+        .cs-score-row {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .cs-score-row {
+          grid-template-columns: 1fr;
+        }
+
+        .cs-filter-stage {
+          flex-direction: column;
+          gap: 8px;
+        }
+      }
+    </style>
+  </head>
+  <body class="cs-page">
+    <canvas id="work-canvas" aria-hidden="true"></canvas>
+
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Back to portfolio">Celeste Shih</a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="index.html#projects">Work</a>
+        <a href="index.html#experience">Experience</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <div class="nav-social">
+        <a href="https://www.linkedin.com/in/celeste-shih-a97037283/" target="_blank" rel="noreferrer" aria-label="LinkedIn" class="nav-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://github.com/celeste920130" target="_blank" rel="noreferrer" aria-label="GitHub" class="nav-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+        </a>
+        <a href="resume.pdf" download class="button primary btn-resume">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Resume
+        </a>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- ── Hero ── -->
+      <section class="cs-hero">
+        <a href="index.html" class="cs-back-link">← All Projects</a>
+        <p class="eyebrow">TypeScript · Next.js · AI · Personal Project</p>
+        <h1>Job Agent</h1>
+        <p class="cs-hero-subtitle">
+          A self-hosted AI system that automates PM and Data internship search, LLM scoring, and application prep — built to solve my own recruiting challenge as an international student targeting the 2027 summer cycle.
+        </p>
+        <div class="cs-meta-row">
+          <div>
+            <p class="cs-meta-label">Type</p>
+            <p class="cs-meta-value">Personal Project</p>
+          </div>
+          <div>
+            <p class="cs-meta-label">Role</p>
+            <p class="cs-meta-value">Product & Engineering (Solo)</p>
+          </div>
+          <div>
+            <p class="cs-meta-label">Timeline</p>
+            <p class="cs-meta-value">Jul 2026 – Present</p>
+          </div>
+          <div>
+            <p class="cs-meta-label">Stack</p>
+            <p class="cs-meta-value">TypeScript · Next.js · SQLite · Gemini AI</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Overview ── -->
+      <section class="section cs-text-section" aria-labelledby="cs-overview">
+        <p class="section-kicker">Overview</p>
+        <h2 id="cs-overview">What is Job Agent?</h2>
+        <p>
+        Every six hours, Job Agent pulls listings from seven sources, filters them down, and scores each survivor against my resume.
+        </p>
+         The result is a ranked board I check each morning — with per-job ATS keyword gap analysis, cover letter drafts, and a stage tracker from "prepared" to offer or rejection. One command to run; data stays local in SQLite..
+        </p>
+        <p>
+         
+      </section>
+
+      <!-- ── Problem ── -->
+      <section class="section cs-text-section" aria-labelledby="cs-problem">
+        <p class="section-kicker">Problem</p>
+        <h2 id="cs-problem">The Recruiting Problem This Solves</h2>
+        <div class="cs-problem-grid">
+          <div class="cs-problem-item">
+            <h3>Volume and noise</h3>
+            <p>PM and Data internship listings are spread across Greenhouse, Lever, Workday, LinkedIn, Handshake, and curated lists. Checking all of them manually every day is unsustainable at scale.</p>
+          </div>
+          <div class="cs-problem-item">
+            <h3>Visa filtering</h3>
+            <p>Many listings explicitly exclude international students. Catching these early, before spending time on an application, requires careful reading of every job description, which doesn't scale.</p>
+          </div>
+          <div class="cs-problem-item">
+            <h3>Relevance signal</h3>
+            <p>Not all PM/Data intern roles are the same. A role at a defense contractor or a senior-level "intern" title aren't what I'm looking for.</p>
+          </div>
+          <div class="cs-problem-item">
+            <h3>Application consistency</h3>
+            <p>Writing cover letters quickly leads to generic content or, worse, hallucinated experience. There's no system to ensure every document is grounded in what's actually on the resume.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Architecture ── -->
+      <section class="section" aria-labelledby="cs-arch">
+        <p class="section-kicker">Architecture</p>
+        <h2 id="cs-arch">System Data Flow</h2>
+        <p style="color: var(--muted); font-size: 0.95rem; margin-bottom: 8px;">
+          Three filter stages run in order before a job reaches the dashboard. Each stage is progressively more expensive — the free regex layers eliminate most noise so the AI only scores what's genuinely relevant.
+        </p>
+        <div class="cs-arch-wrap">
+          <div class="mermaid">
+flowchart LR
+    subgraph SRC["📥 Ingestion · every 6h"]
+        direction TB
+        A1["ATS Direct\nGreenhouse · Lever\nAshby · Workday"]
+        A2["Curated Feeds\nJobright · zshah101"]
+        A3["Gmail IMAP\nLinkedIn · Handshake\nIndeed"]
+    end
+
+    subgraph FILTER["🔍 Filter Pipeline · free"]
+        direction TB
+        T0["Stage 0 — Title Filter\nBlocks SWE · sales · recruiter\nRequires intern + PM / DA / BA"]
+        T1["Stage 1 — Hard Filter\n13 visa exclusion patterns\nLocation · applied-company check"]
+    end
+
+    DEAD["🗑️ filtered_out\nreason stored"]
+
+    T2["🧠 LLM Scoring\nGemini 2.0 Flash\noverall · skillsFit\nseniorityFit · sponsorshipSignal\npros / cons / missingSkills\nIndustry ± 10–20 pts"]
+
+    subgraph OUT["Output"]
+        direction TB
+        D1["jobs Dashboard\nRanked · ATS gap\nCover letter · Stage tracker"]
+        D2["Daily Digest\n09:00 · Resend"]
+    end
+
+    SRC --> FILTER
+    FILTER -->|fail| DEAD
+    FILTER -->|pass| T2
+    T2 --> OUT
+          </div>
+        </div>
+      </section>
+
+      <!-- ── LLM Scoring ── -->
+      <section class="section" aria-labelledby="cs-scoring">
+        <p class="section-kicker">LLM Scoring Design</p>
+        <h2 id="cs-scoring">How Jobs Get Scored</h2>
+        <p style="color: var(--muted); font-size: 0.95rem; margin-bottom: 24px; max-width: 720px;">
+          Each job that survives the filter pipeline is scored by Gemini 2.0 Flash — given the job description, the candidate's resume skill tags, and industry preference weights from the config file.
+        </p>
+        <div class="cs-score-row">
+          <div class="cs-score-card">
+            <h3>overall</h3>
+            <p>0–100 match score. Sponsorship signal carries the highest weight — a job that won't accept F-1 CPT is effectively a zero regardless of skill fit.</p>
+          </div>
+          <div class="cs-score-card">
+            <h3>skillsFit</h3>
+            <p>How well the candidate's resume skill tags overlap with what the JD requires.</p>
+          </div>
+          <div class="cs-score-card">
+            <h3>seniorityFit</h3>
+            <p>100 = designed for interns, 0 = requires senior experience. Catches roles labeled "intern" but scoped for 3+ years.</p>
+          </div>
+          <div class="cs-score-card">
+            <h3>sponsorshipSignal</h3>
+            <p><code>likely_yes</code> / <code>likely_no</code> / <code>unclear</code> based on visa language in the JD.</p>
+          </div>
+          <div class="cs-score-card">
+            <h3>pros / cons</h3>
+            <p>Plain-language reasons for and against the match, surfaced in the job card for quick triage.</p>
+          </div>
+          <div class="cs-score-card">
+            <h3>missingSkills</h3>
+            <p>Skills the JD requires that aren't in the resume bullet pool — used to identify gaps before applying.</p>
+          </div>
+        </div>
+        <div class="cs-callout">
+          Industry preferences (priority industries like Consumer Software and AI/ML, excluded industries like Defense and Crypto) are injected into the scoring prompt as explicit weighting instructions (+10–15 or −10–20 pts) — kept in a config file the user controls, not hardcoded.
+        </div>
+      </section>
+
+      <!-- ── Key Decisions ── -->
+      <section class="section cs-text-section" aria-labelledby="cs-decisions">
+        <p class="section-kicker">Key Product Decisions</p>
+        <h2 id="cs-decisions">Three Design Choices Worth Explaining</h2>
+
+        <div class="cs-steps">
+          <div class="cs-step">
+            <span class="cs-step-num">01</span>
+            <div>
+              <h3>Free regex layers before any AI call</h3>
+              <p>Each sync can return hundreds of raw listings — mostly SWE, sales, or full-time roles. Sending everything to an LLM would exhaust quota immediately. Two free stages run first:</p>
+              <div class="cs-filter-stages" style="margin-top: 14px;">
+                <div class="cs-filter-stage">
+                  <span class="cs-filter-badge badge-free">Free</span>
+                  <div>
+                    <h3>Stage 0 — Title Filter</h3>
+                    <p>Runs at ingestion. Blocks SWE, sales, recruiter, and unpaid roles. Requires an internship indicator and a PM / DA / BA / Strategy pattern.</p>
+                  </div>
+                </div>
+                <div class="cs-filter-stage">
+                  <span class="cs-filter-badge badge-free">Free</span>
+                  <div>
+                    <h3>Stage 1 — Hard Filter</h3>
+                    <p>Checks 13 sponsorship exclusion patterns, preferred locations, and companies already applied to. Failed jobs are marked <code>filtered_out</code> with a stored reason.</p>
+                  </div>
+                </div>
+                <div class="cs-filter-stage">
+                  <span class="cs-filter-badge badge-llm">AI</span>
+                  <div>
+                    <h3>Stage 2 — LLM Scoring</h3>
+                    <p>Only surviving jobs get scored. Together the free layers eliminate ~90% of raw listings before a single AI call.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cs-step">
+            <span class="cs-step-num">02</span>
+            <div>
+              <h3>Verification pass to prevent hallucination</h3>
+              <p>Any generated draft goes through a second verification pass — every claim is checked against the source resume bullet pool. Sentences that can't be traced back to a real bullet are automatically removed, with the count flagged in the UI.</p>
+            </div>
+          </div>
+
+          <div class="cs-step">
+            <span class="cs-step-num">03</span>
+            <div>
+              <h3>No auto-apply — system prepares to 100%, user clicks Apply</h3>
+              <p>The system generates a cover letter, surfaces resume bullets to highlight, runs ATS keyword gap analysis, and pre-fills form answers. It does not submit anything.</p>
+              <p style="margin-top: 12px;">The boundary is enforced in the data model: <code>Application.stage</code> is only updated manually through the UI. The apply URL is surfaced as a button the user clicks themselves. The value is in preparation quality, not in removing the human decision.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Stack ── -->
+      <section class="section cs-text-section" aria-labelledby="cs-stack">
+        <p class="section-kicker">Stack & Methods</p>
+        <h2 id="cs-stack">Tools Used</h2>
+        <ul class="skill-list" aria-label="Tools and methods">
+          <li>TypeScript</li>
+          <li>Next.js 16 App Router</li>
+          <li>SQLite + Prisma 5</li>
+          <li>Gemini 2.0 Flash</li>
+          <li>node-cron</li>
+          <li>Tailwind CSS</li>
+          <li>IMAP / nodemailer</li>
+          <li>Resend (email)</li>
+          <li>unpdf (PDF parsing)</li>
+          <li>Greenhouse API</li>
+          <li>Lever API</li>
+          <li>Ashby API</li>
+          <li>Workday</li>
+        </ul>
+      </section>
+
+      <!-- ── Next ── -->
+      <section class="section cs-text-section">
+        <p class="section-kicker">Next</p>
+        <h2>Explore More Work</h2>
+        <div class="hero-actions">
+          <a href="index.html#projects" class="button primary">All Projects</a>
+          <a href="index.html#contact" class="button secondary">Get in Touch</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© 2026 Celeste Shih.</p>
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/in/celeste-shih-a97037283/" target="_blank" rel="noreferrer" aria-label="LinkedIn" class="nav-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://github.com/celeste920130" target="_blank" rel="noreferrer" aria-label="GitHub" class="nav-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+        </a>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: 'base',
+        flowchart: {
+          useMaxWidth: true,
+          padding: 8,
+          nodeSpacing: 35,
+          rankSpacing: 55,
+        },
+        themeVariables: {
+          primaryColor: '#dbeafe',
+          primaryTextColor: '#123b79',
+          primaryBorderColor: '#93c5fd',
+          lineColor: '#64748b',
+          secondaryColor: '#f1f5f9',
+          tertiaryColor: '#f7f5ee',
+          fontFamily: '"Noto Sans TC", system-ui, sans-serif',
+          fontSize: '22px',
+        }
+      });
+    </script>
+  </body>
+</html>
