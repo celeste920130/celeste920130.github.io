@@ -34,10 +34,10 @@
         <a href="https://github.com/celeste920130" target="_blank" rel="noreferrer" aria-label="GitHub" class="nav-icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
         </a>
-        <a href="resume.pdf" download class="button primary btn-resume">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Download Resume
-        </a>
+        <div class="resume-picker">
+          <a href="pm-resume.pdf" download class="button primary btn-resume" aria-label="Download PM resume">PM CV</a>
+          <a href="analyst-resume.pdf" download class="button primary btn-resume" aria-label="Download Analyst resume">Analyst CV</a>
+        </div>
       </div>
     </header>
 
@@ -48,16 +48,20 @@
         </div>
         <div class="hero-copy">
           <p class="eyebrow"> Product Strategy / Cloud / Data Analytics </p>
-          <h1 id="hero-title">Turning complex business problems into data-backed product decisions.</h1>
+          <h1 id="hero-title">Celeste(Chih Hsuan) Shih</h1>
           <p class="hero-text">
-            I am Celeste Shih, a product strategist and analyst with experience across e-commerce, Cloud products, and Ed-tech. I bridge technology, analytics, and business strategy to build human-centered software products.
+            I am Celeste Shih, currently studying M.S. in Software Management at Carnegie Mellon University (Silicon Valley). I am a product strategist and analyst with experience across e-commerce, Cloud products, and Ed-tech. I bridge technology, analytics, and business strategy to build human-centered software products.
           </p>
           <div class="hero-actions" aria-label="Primary actions">
             <a class="button primary" href="#projects">View Work</a>
             <a class="button secondary" href="mailto:jamie920130@gmail.com">Contact Me</a>
-            <a class="button secondary" href="resume.pdf" download>
+            <a class="button secondary" href="pm-resume.pdf" download>
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              Download Resume
+              PM Resume
+            </a>
+            <a class="button secondary" href="analyst-resume.pdf" download>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Analyst Resume
             </a>
           </div>
         </div>
@@ -82,7 +86,7 @@
                 <p class="project-type">TypeScript · Next.js · Gemini AI</p>
                 <h3>Job Agent</h3>
                 <p>
-                  A self-hosted AI system that automates PM/Data internship search, LLM scoring, and application prep — built to solve my own recruiting challenge as an international student targeting the 2027 summer cycle.
+                  A self-hosted AI system that automates PM/Data internship search, LLM scoring, and application prep. 
                 </p>
                 <a href="job-agent.html" aria-label="Read more about Job Agent">Case study</a>
               </div>
@@ -96,7 +100,7 @@
                 <p class="project-type">AI Product·Cloud Architecture</p>
                 <h3>Smart Archie AI chatbot</h3>
                 <p>
-                  An AI-driven cloud architecture assistant that generates precise architecture diagrams through dialogue and survey inputs, helping teams accelerate cloud migration planning.
+                  Cloud architects spent days drawing diagrams by hand. What if the diagram came out of the conversation and survey? 
                 </p>
                 <a href="smart-archie.html" aria-label="Read more about Smart Archie">Case study</a>
               </div>
@@ -108,7 +112,7 @@
               </div>
               <div class="project-body">
                 <p class="project-type">Excel · YouTube Analytics · Python</p>
-                <h3>From Views to Learning</h3>
+                <h3>NTU OpenCourseWare Metrics Redesign</h3>
                 <p>
                   Rethinking how NTU's OpenCourseWare measures a course video, measuring metrics from view count to retention and completion rates across 100+ videos.
                 </p>
@@ -126,7 +130,7 @@
                 <p>
                   Built automated dashboards for subcategory sales and campaign performance, supporting promotion strategy evaluation and 75% YoY campaign growth.
                 </p>
-                <a href="#experience" aria-label="Read more about Shopee Performance Dashboard">Case study</a>
+                <a href="#experience" aria-label="See Shopee experience below">See in experience ↓</a>
               </div>
             </article>
 
@@ -149,12 +153,12 @@
                 <img src="price-compare-preview.png" alt="Price Compare Assistant dashboard" class="project-preview-img" />
               </div>
               <div class="project-body">
-                <p class="project-type">Python · FastAPI · Gemini Vision · Playwright</p>
-                <h3>Price Compare Assistant</h3>
+                <p class="project-type">Python · FastAPI · Gemini Vision</p>
+                <h3>Competitor Price Tracker</h3>
                 <p>
                   Upload Shopee / momo screenshots and let Gemini Vision auto-extract product info, then generate a side-by-side price comparison table with one-click CSV export.
                 </p>
-                <a href="https://github.com/celeste920130/price-compare-assistant" target="_blank" rel="noopener" aria-label="View Price Compare Assistant on GitHub">GitHub →</a>
+                <a href="price-tracker.html" aria-label="Read more about Competitor Price Tracker">Case study</a>
               </div>
             </article>
           </div>
@@ -187,7 +191,7 @@
             <div>
               <p class="role-meta">Jul. 2024 - Jun. 2025</p>
               <h3>Cloud Product Management Intern, Cathay Financial Holdings, Taipei</h3>
-              <p class="role-context">"Smart Archie" | internal LLM assistant that turns dialogue into cloud architecture diagrams, reducing solution design time from days to minutes.</p>
+              <p class="role-context">"Smart Archie" | internal LLM assistant that turns dialogue into cloud architecture diagrams.</p>
             </div>
             <ul>
               <li>Prioritized and shipped 4 features from V0.4.0 to V0.4.1 with cloud architects and engineers in an Agile team, resolving top UX pain points surfaced in user testing.</li>
@@ -199,6 +203,7 @@
             <div>
               <p class="role-meta">Feb. 2025 - Jun. 2025</p>
               <h3>Data Analysis Assistant, NTU OpenCourseWare (OCW), Taipei</h3>
+              <p class="role-context"> 36M+ views | 100+ course videos | metrics redesign</p>
             </div>
             <ul>
               <li>Analyzed viewer behavior from 36M+ views across 100+ OCW course videos, introducing retention metrics (completion rate, drop-off) that replaced traditional click-based evaluation.</li>
@@ -218,32 +223,51 @@
       </section>
 
       <section class="section split" id="about" aria-labelledby="about-title">
-        <div>
-          <p class="section-kicker">About</p>
-          <h2 id="about-title">I connect analytics, technology, and business strategy.</h2>
-        </div>
         <div class="about-copy">
-          <p>
-            I studied marketing at National Taiwan University. My coursework included Business Analytics, Data Visualization, SQL, Digital Marketing, and Programming for Business Computing.
-          </p>
-          <ul class="skill-list" aria-label="Core skills">
-            <li>SQL</li>
-            <li>Tableau</li>
-            <li>AWS / GCP</li>
-            <li>Excel</li>
-            <li>Agile / Scrum</li>
-            <li>A/B Test Planning</li>
-            <li>Market Analysis</li>
-            <li>Python / pandas</li>
-            <li>Figma</li>
-            <li>UX Research</li>
-          </ul>
+          <p class="section-kicker">Skills</p>
+          <h2 id="about-title">Skills</h2>
+        </div>
+        <div class="skill-groups">
+          <div class="skill-group">
+            <p class="skill-group-label">Product & Strategy</p>
+            <ul class="skill-list" aria-label="Product and strategy skills">
+              <li>Product Strategy</li>
+              <li>Roadmapping</li>
+              <li>User Research</li>
+              <li>A/B Testing</li>
+              <li>Agile / Scrum</li>
+              <li>Market & Competitor Analysis</li>
+              <li>Figma</li>
+              <li>JIRA</li>
+              <li>Confluence</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <p class="skill-group-label">Data & Analytics</p>
+            <ul class="skill-list" aria-label="Data and analytics skills">
+              <li>SQL</li>
+              <li>Python (pandas)</li>
+              <li>R</li>
+              <li>Excel</li>
+              <li>Tableau</li>
+              <li>SPSS</li>
+              <li>Statistical Modeling</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <p class="skill-group-label">AI & Cloud</p>
+            <ul class="skill-list" aria-label="AI and cloud skills">
+              <li>Prompt Engineering</li>
+              <li>RAG</li>
+              <li>AWS</li>
+              <li>GCP</li>
+            </ul>
+          </div>
         </div>
       </section>
 
       <section class="section contact" id="contact" aria-labelledby="contact-title">
-        <p class="section-kicker">Contact</p>
-        <h2 id="contact-title">Data products, business analytics, or cloud strategy.</h2>
+        <h2 id="contact-title">Contact</h2>
         <p>Feel free to reach out by email or LinkedIn.</p>
         <div class="contact-links">
           <a href="mailto:jamie920130@gmail.com">jamie920130@gmail.com</a>

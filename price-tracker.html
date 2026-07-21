@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Competitor Price Tracker – A Gemini Vision tool for extracting competitor pricing from screenshots. A case study by Celeste Shih." />
+    <title>Competitor Price Tracker Case Study | Celeste Shih</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .cs-arch-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin-top: 8px;
+        padding: 32px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.76);
+      }
+
+      .cs-arch-wrap .mermaid svg {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+      }
+
+      .cs-screenshot {
+        display: block;
+        width: 100%;
+        margin-top: 20px;
+        border-radius: 8px;
+        border: 1px solid var(--line);
+        box-shadow: 0 8px 28px rgba(21, 32, 28, 0.1);
+        object-fit: cover;
+      }
+
+      .cs-screenshot-caption {
+        margin-top: 8px;
+        font-size: 0.82rem;
+        color: var(--muted);
+        font-style: italic;
+      }
+
+      .cs-callout {
+        margin-top: 24px;
+        padding: 20px 24px;
+        border-left: 3px solid var(--blue);
+        border-radius: 0 8px 8px 0;
+        background: var(--blue-soft);
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: var(--blue-deep);
+      }
+
+      .cs-score-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+        margin-top: 8px;
+      }
+
+      .cs-score-card {
+        padding: 24px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.76);
+      }
+
+      .cs-score-card h3 {
+        font-size: 0.92rem;
+        font-family: "Space Grotesk", sans-serif;
+        color: var(--blue-deep);
+        margin-bottom: 6px;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+      }
+
+      .cs-score-card p {
+        color: var(--muted);
+        font-size: 0.88rem;
+        margin: 0;
+        line-height: 1.55;
+      }
+
+      @media (max-width: 860px) {
+        .cs-score-row {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .cs-score-row {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body class="cs-page">
+    <canvas id="work-canvas" aria-hidden="true"></canvas>
+
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Back to portfolio">Celeste Shih</a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="index.html#projects">Work</a>
+        <a href="index.html#experience">Experience</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <div class="nav-social">
+        <a href="https://www.linkedin.com/in/celeste-shih-a97037283/" target="_blank" rel="noreferrer" aria-label="LinkedIn" class="nav-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://github.com/celeste920130" target="_blank" rel="noreferrer" aria-label="GitHub" class="nav-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+        </a>
+        <div class="resume-picker">
+          <a href="pm-resume.pdf" download class="button primary btn-resume" aria-label="Download PM resume">PM CV</a>
+          <a href="analyst-resume.pdf" download class="button primary btn-resume" aria-label="Download Analyst resume">Analyst CV</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- ── Hero ── -->
+      <section class="cs-hero">
+        <a href="index.html" class="cs-back-link">← All Projects</a>
+        <p class="eyebrow">Python · Gemini Vision · Personal Project</p>
+        <h1>Competitor Price Tracker</h1>
+        <p class="cs-hero-subtitle">
+          A screenshot-in, table-out tool that turns competitor product pages into structured pricing data — built to replace hours of manual model-by-model comparison during category subsidy planning.
+        </p>
+        <div class="cs-meta-row">
+          <div>
+            <p class="cs-meta-label">Type</p>
+            <p class="cs-meta-value">Personal Project</p>
+          </div>
+          <div>
+            <p class="cs-meta-label">Role</p>
+            <p class="cs-meta-value">Product & Engineering (Solo)</p>
+          </div>
+          <div>
+            <p class="cs-meta-label">Timeline</p>
+            <p class="cs-meta-value">Jul 2026</p>
+          </div>
+          <div>
+            <p class="cs-meta-label">Stack</p>
+            <p class="cs-meta-value">Python · FastAPI · Gemini Vision · SQLite</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── The Constraint ── -->
+      <section class="section cs-text-section" aria-labelledby="cs-constraint">
+        <p class="section-kicker">The Constraint</p>
+        <h2 id="cs-constraint">Competitor sites block scrapers, so pricing data only exists as screenshots.</h2>
+        <p>
+          During my time in category management at Shopee, one recurring task was benchmarking competitor prices for power tools before setting subsidy strategy. The competitor's site actively blocks automated requests — no public API, no scrapable listing pages, and the anti-bot layer flags anything that isn't a real browser session. The only sanctioned way to see a price was to open the page yourself and take a screenshot.
+        </p>
+        <p>
+          That constraint framed the entire tool. Instead of trying to fight the block, the workflow accepts screenshots as the source of truth and moves the labor problem to the next step: extracting structured data from them.
+        </p>
+      </section>
+
+      <!-- ── Why This Was Worth Building ── -->
+      <section class="section cs-text-section" aria-labelledby="cs-why">
+        <p class="section-kicker">Why It Was Worth Building</p>
+        <h2 id="cs-why">Power tools are a long-tail SKU category.</h2>
+        <p>
+          A single brand carries dozens of overlapping SKUs — same model number in bare-tool, single-battery, dual-battery, and kit variants, each with its own price point. Comparing one competitor across even a narrow segment meant opening 30–50 product pages, copying model numbers into a spreadsheet, and hand-typing prices for each variant.
+        </p>
+        <p>
+          The failure mode was not the individual screenshot — it was doing it at scale, weekly. Once the volume crosses a threshold, transcription errors creep in, prices go stale between refreshes, and the analyst starts making decisions from an outdated sheet. The tool exists to remove that transcription step entirely.
+        </p>
+      </section>
+
+      <!-- ── How It Works ── -->
+      <section class="section" aria-labelledby="cs-arch">
+        <p class="section-kicker">Architecture</p>
+        <h2 id="cs-arch">How It Works</h2>
+        <p style="color: var(--muted); font-size: 0.95rem; margin-bottom: 8px;">
+          One user action — drop screenshots into the browser — triggers a four-stage pipeline. Each screenshot flows through vision extraction, normalization, and storage before showing up in the comparison table.
+        </p>
+        <div class="cs-arch-wrap">
+          <div class="mermaid">
+flowchart LR
+    UPLOAD["📷 Screenshot Upload\nDrop 1–N images\nJPG · PNG · WebP · ≤20MB"]
+
+    subgraph EXTRACT["🧠 Vision Extraction"]
+        direction TB
+        COMPRESS["Compress\nMax 1600px long side\nJPEG quality 85"]
+        GEMINI["Gemini Flash\nSingle-shot structured prompt\nReturns JSON array"]
+        PARSE["Parse & Retry\nStrip markdown wrapper\nOne retry on JSON fail"]
+    end
+
+    NORMALIZE["🔧 Normalize\nmodel_id → uppercase alphanumeric\nvariant_key → canonical form\n(裸機 / 單2.0 / 雙5.0 / …)"]
+
+    STORE[("💾 SQLite\nextractions table\n15 fields per row")]
+
+    subgraph OUT["📊 Output"]
+        direction TB
+        TABLE["Compare Table\nGrouped by model + variant\nShopee vs momo vs Amazon"]
+        CSV["CSV Export\nUTF-8 BOM for Excel"]
+    end
+
+    UPLOAD --> EXTRACT
+    EXTRACT --> NORMALIZE
+    NORMALIZE --> STORE
+    STORE --> OUT
+          </div>
+        </div>
+        <img src="price-compare-ui.png" alt="Price Compare Assistant upload screen with drag-and-drop area" class="cs-screenshot" />
+        <p class="cs-screenshot-caption">The upload page — one drop zone, five tabs, and a badge showing the active Gemini model.</p>
+      </section>
+
+      <!-- ── Key Design Decisions ── -->
+      <section class="section cs-text-section" aria-labelledby="cs-decisions">
+        <p class="section-kicker">Key Product Decisions</p>
+        <h2 id="cs-decisions">Three Choices Worth Explaining</h2>
+
+        <div class="cs-steps">
+          <div class="cs-step">
+            <span class="cs-step-num">01</span>
+            <div>
+              <h3>A vision model, not OCR</h3>
+              <p>
+                OCR can read the pixels off a product page — but reading the text and understanding the layout are different problems. On a real listing, "M18FID3" and "NT$8,990" are just two strings on a canvas; nothing in the raw text tells a downstream system which string is the model number and which is the current sale price (as opposed to the crossed-out MSRP or a sibling variant).
+              </p>
+              <p style="margin-top: 12px;">
+                The prompt handed to Gemini Vision does that assignment explicitly. It defines three page archetypes ("price-table style" for momo, "button-select style" for Shopee where only the highlighted variant's price is valid, and "no variants"), and instructs the model on how many rows to return for each case. The output is a JSON array with a fixed 15-field schema — platform, brand, model, normalized model, variant, variant key, full title, price, currency, specs, official-import flag, confidence, and notes — so the parsing step downstream can be strict rather than heuristic.
+              </p>
+              <p style="margin-top: 12px;">
+                What OCR-plus-regex would have needed: a per-site parser, updated every time the layout shifts. The vision model absorbs that instability.
+              </p>
+            </div>
+          </div>
+
+          <div class="cs-step">
+            <span class="cs-step-num">02</span>
+            <div>
+              <h3>Screenshot upload is the workflow, not a fallback</h3>
+              <p>
+                The obvious question is why the tool doesn't just scrape the competitor site directly. The answer is that "just scrape" isn't available: the target site's anti-bot measures make automated collection unreliable at best and against terms of service at worst. Building around that constraint — rather than fighting it — kept the project small, legal, and dependable.
+              </p>
+              <p style="margin-top: 12px;">
+                A useful side effect: the screenshot workflow works on any e-commerce site, not just the ones I've written custom parsers for. When the category expanded from power tools to another vertical, no code changed — the analyst just dropped in different screenshots.
+              </p>
+            </div>
+          </div>
+
+          <div class="cs-step">
+            <span class="cs-step-num">03</span>
+            <div>
+              <h3>CSV output, not a locked-in dashboard</h3>
+              <p>
+                The tool ends at "structured, comparable data" — it deliberately doesn't try to be the analyst's final workspace. Category strategy work always lives in a spreadsheet: subsidy calculations, margin models, cross-referencing against internal sales data. Forcing that back into a bespoke UI would just add friction.
+              </p>
+              <p style="margin-top: 12px;">
+                Every comparison view is one-click exportable to CSV with a UTF-8 BOM so Excel opens it in Chinese without mojibake. The tool's job is to be the fastest step in someone else's analytical process, not to replace it.
+              </p>
+              <img src="price-compare-table.png" alt="Compare table grouping model IDs across platforms with Shopee and momo prices, difference, and confidence" class="cs-screenshot" />
+              <p class="cs-screenshot-caption">The compare table — one row per (model + variant), platforms as columns, difference and subsidy needed inline. Export to CSV lives in the top-right.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Vision Extraction Detail ── -->
+      <section class="section" aria-labelledby="cs-extraction">
+        <p class="section-kicker">Vision Extraction Design</p>
+        <h2 id="cs-extraction">What The Model Is Actually Asked To Do</h2>
+        <p style="color: var(--muted); font-size: 0.95rem; margin-bottom: 24px; max-width: 720px;">
+          The prompt is the whole product. It's what makes Gemini return a usable JSON row instead of a paragraph of prose. Six fields do the heavy lifting.
+        </p>
+        <div class="cs-score-row">
+          <div class="cs-score-card">
+            <h3>page_type</h3>
+            <p>The model first classifies the layout — price-table (all variants priced) vs button-select (only the highlighted one is priced) vs no-variants. This decides row count.</p>
+          </div>
+          <div class="cs-score-card">
+            <h3>model_id</h3>
+            <p>Raw model as printed on the page, e.g. "M18 FID3". The single most important field for downstream matching.</p>
+          </div>
+          <div class="cs-score-card">
+            <h3>model_id_normalized</h3>
+            <p>Uppercased, stripped of spaces and punctuation — "M18FID3". This is the key used to group across platforms.</p>
+          </div>
+          <div class="cs-score-card">
+            <h3>variant_key</h3>
+            <p>Canonical form for battery configuration — 裸機, 單2.0, 雙5.0, 2.5+5.0. Prevents "single battery" and "1-battery kit" from being treated as different variants.</p>
+          </div>
+          <div class="cs-score-card">
+            <h3>price</h3>
+            <p>Current sale price only, stripped of NT$ / $ / commas. Crossed-out MSRPs are explicitly excluded in the prompt.</p>
+          </div>
+          <div class="cs-score-card">
+            <h3>confidence + notes</h3>
+            <p>A 0–1 self-rated score, plus a free-text note for anything ambiguous. Rows with low confidence surface in the UI for human review before saving.</p>
+          </div>
+        </div>
+        <div class="cs-callout">
+          Every response is validated as JSON before hitting the database. If Gemini returns markdown-wrapped JSON, the parser strips the wrapper; if the response is still invalid, the pipeline retries the same image once. On the second failure, the row is stored with a <code>parse_error</code> flag so it appears in the UI as "needs manual entry" — never silently dropped.
+        </div>
+        <img src="price-compare-raw.png" alt="Raw extraction table showing model, variant, price, and confidence score for each screenshot" class="cs-screenshot" />
+        <p class="cs-screenshot-caption">Every row after extraction — platform, brand, model, variant, price, and a confidence score. Anything below ~90% is an obvious review candidate.</p>
+      </section>
+
+      <!-- ── Limitations ── -->
+      <section class="section cs-text-section" aria-labelledby="cs-limits">
+        <p class="section-kicker">Honest Limits</p>
+        <h2 id="cs-limits">What It Doesn't Do Well</h2>
+        <div class="cs-steps">
+          <div class="cs-step">
+            <span class="cs-step-num">01</span>
+            <div>
+              <h3>Screenshot quality is a hard floor</h3>
+              <p>Low-resolution or partially cropped screenshots — where the price element got cut off, or the variant label is behind a hover state — produce either wrong extractions or low-confidence rows that need manual fixing. The tool surfaces confidence scores so bad rows are visible, but it can't recover data that wasn't in the image.</p>
+            </div>
+          </div>
+          <div class="cs-step">
+            <span class="cs-step-num">02</span>
+            <div>
+              <h3>Non-standard layouts still slip through</h3>
+              <p>The three page-type archetypes cover Shopee, momo, and most Amazon listings well. Independent brand sites with heavily custom layouts (long-scroll pages, spec tables mixed with marketing copy) sometimes get parsed as the wrong archetype. When this happens the row lands with a low confidence score and a note flagging the ambiguity.</p>
+            </div>
+          </div>
+          <div class="cs-step">
+            <span class="cs-step-num">03</span>
+            <div>
+              <h3>Cross-platform matching relies on the model number being visible</h3>
+              <p>Comparison rows are keyed on <code>model_id_normalized</code>. If a listing hides the model in an image (common for generic no-name products), it won't group with matching listings from other platforms. This is by design — silent fuzzy matching would be worse than no match — but it means unbranded SKUs need manual reconciliation.</p>
+            </div>
+          </div>
+          <div class="cs-step">
+            <span class="cs-step-num">04</span>
+            <div>
+              <h3>The tool is not a real-time price monitor</h3>
+              <p>Because it depends on manually captured screenshots, prices are only as fresh as the last upload. It's a decision-support tool for weekly subsidy planning, not an alerting system for flash sales.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Stack ── -->
+      <section class="section cs-text-section" aria-labelledby="cs-stack">
+        <p class="section-kicker">Stack & Methods</p>
+        <h2 id="cs-stack">Tools Used</h2>
+        <ul class="skill-list" aria-label="Tools and methods">
+          <li>Python 3.11</li>
+          <li>FastAPI</li>
+          <li>Gemini Flash (Vision)</li>
+          <li>SQLite</li>
+          <li>Pillow (image compression)</li>
+          <li>Server-Sent Events</li>
+          <li>Vanilla JS frontend</li>
+          <li>CSV / UTF-8 BOM export</li>
+        </ul>
+      </section>
+
+      <!-- ── Next ── -->
+      <section class="section cs-text-section">
+        <p class="section-kicker">Next</p>
+        <h2>Explore More Work</h2>
+        <div class="hero-actions">
+          <a href="index.html#projects" class="button primary">All Projects</a>
+          <a href="index.html#contact" class="button secondary">Get in Touch</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© 2026 Celeste Shih.</p>
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/in/celeste-shih-a97037283/" target="_blank" rel="noreferrer" aria-label="LinkedIn" class="nav-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://github.com/celeste920130" target="_blank" rel="noreferrer" aria-label="GitHub" class="nav-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+        </a>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: 'base',
+        flowchart: {
+          useMaxWidth: true,
+          padding: 8,
+          nodeSpacing: 35,
+          rankSpacing: 55,
+        },
+        themeVariables: {
+          primaryColor: '#dbeafe',
+          primaryTextColor: '#123b79',
+          primaryBorderColor: '#93c5fd',
+          lineColor: '#64748b',
+          secondaryColor: '#f1f5f9',
+          tertiaryColor: '#f7f5ee',
+          fontFamily: '"Noto Sans TC", system-ui, sans-serif',
+          fontSize: '22px',
+        }
+      });
+    </script>
+  </body>
+</html>

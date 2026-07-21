@@ -112,16 +112,16 @@ main {
 
 .hero {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   gap: 56px;
-  min-height: 65vh;
-  padding: 6vh 0 7vh;
+  min-height: 78vh;
+  padding: 10vh 0 8vh;
 }
 
 .hero-photo-wrap {
   flex-shrink: 0;
-  align-self: flex-start;
+  align-self: center;
   order: 2;
 }
 
@@ -230,7 +230,7 @@ h1 {
 .split h2,
 .contact h2 {
   margin-bottom: 18px;
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 900;
 }
 
@@ -321,6 +321,13 @@ h1 {
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.76);
   box-shadow: 0 18px 48px rgba(21, 32, 28, 0.08);
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 22px 56px rgba(21, 32, 28, 0.14);
 }
 
 .project-visual {
@@ -408,6 +415,14 @@ h1 {
   font-weight: 700;
   text-decoration-thickness: 2px;
   text-underline-offset: 5px;
+  position: static;
+}
+
+.project-card .project-body a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
 }
 
 .timeline {
@@ -468,6 +483,46 @@ h1 {
   margin: 24px 0 0;
   padding: 0;
   list-style: none;
+}
+
+.skill-groups {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+}
+
+#about.split {
+  grid-template-columns: minmax(0, 0.5fr) minmax(0, 1.4fr);
+}
+
+@media (max-width: 900px) {
+  #about.split {
+    grid-template-columns: 1fr;
+  }
+}
+
+.skill-group-label {
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--blue-deep);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
+}
+
+.skill-group .skill-list {
+  margin-top: 0;
+}
+
+.resume-picker {
+  display: inline-flex;
+  gap: 6px;
+}
+
+.resume-picker .btn-resume {
+  padding-left: 12px;
+  padding-right: 12px;
 }
 
 .skill-list li {
@@ -602,7 +657,7 @@ h1 {
   .section-heading h2,
   .split h2,
   .contact h2 {
-    font-size: 2.3rem;
+    font-size: 2rem;
   }
 
   .split,
