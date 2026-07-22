@@ -12,6 +12,33 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
+    <style>
+      .cs-screenshot {
+        display: block;
+        width: 100%;
+        margin-top: 20px;
+        border-radius: 8px;
+        border: 1px solid var(--line);
+        box-shadow: 0 8px 28px rgba(21, 32, 28, 0.1);
+        object-fit: cover;
+        background: #fff;
+      }
+      .cs-screenshot-caption {
+        margin-top: 8px;
+        font-size: 0.82rem;
+        color: var(--muted);
+        font-style: italic;
+      }
+      .cs-screenshot-pair {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-top: 20px;
+      }
+      @media (max-width: 640px) {
+        .cs-screenshot-pair { grid-template-columns: 1fr; }
+      }
+    </style>
   </head>
   <body class="cs-page">
     <canvas id="work-canvas" aria-hidden="true"></canvas>
@@ -52,19 +79,12 @@
 
         <h2 id="cs-context">The Problem with View Count</h2>
         <p>
-          NTU's OpenCourseWare channel has <strong>36M+ cumulative views</strong>, but the academic office judged each course video almost entirely by view count. That's a vanity metric: many viewers click the first episode and drop off within the first 1%, so a high-view video isn't one people actually learn from. I set out to define a better measure of an "effective" course video, then translate it into content decisions.
-        </p>
-      </section>
-
-      <section class="section cs-text-section" aria-labelledby="cs-approach">
-        <p class="section-kicker">Approach</p>
-        <h2 id="cs-approach">Moving Past View Count</h2>
-        <p>
-          Using Python and Excel on YouTube Analytics across 100+ videos, I moved past view count to engagement metrics: retention at the <strong>1% / 50% / 70% / 90%</strong> marks, completion rate, and average view duration. Behavior was then segmented by course type and audience. The goal was to see how far into a video viewers actually stayed, beyond the initial click.
+          NTU's OpenCourseWare channel has <strong>36M+ cumulative views</strong>, but the academic office judged each course video almost entirely by view count in the past. Many viewers click the first episode and drop off within the first 1%, so we can't assume a high-view video means people actually learn from it. I set out to define a better measure of an "effective" course video, then translate it into content decisions.
         </p>
       </section>
 
       <section class="section cs-text-section" aria-labelledby="cs-findings">
+
         <p class="section-kicker">Key Findings</p>
         <h2 id="cs-findings">What the Data Shows</h2>
         <div class="cs-findings-list">
@@ -73,8 +93,10 @@
             <div>
               <h3>View count overstates impact</h3>
               <p>
-                Viewing drops sharply after the first <span class="cs-stat-inline">1%</span> mark, and the 50–90% retention curves nearly converge. "Most-viewed" videos are mostly first episodes that people sampled without finishing — high view counts signal discovery, not learning.
+                Viewing drops sharply after the first <strong>1%</strong> mark, but the 70–90% retention curves nearly converge. "Most-viewed" videos are mostly first episodes that people sampled without finishing, so high view counts signal discovery, not learning.
               </p>
+              <img src="ocw-view-count-overstates.png" alt="Retention curve comparing first episodes (most-viewed) with later episodes across four stages: opened, watched ≥1%, ≥50%, and finished. First episodes see a steeper drop while later episodes stay ahead throughout." class="cs-screenshot" />
+              <p class="cs-screenshot-caption">Retention vs. opens, averaged across 9 courses. First episodes get the most clicks but shed viewers faster: only 11% finish, versus 18% for later episodes. The curves flatten after ≥50%, meaning viewers who make it that far usually see it through.</p>
             </div>
           </div>
           <div class="cs-finding-item">
@@ -82,8 +104,18 @@
             <div>
               <h3>Course type drives very different viewing behavior</h3>
               <p>
-                Humanities courses (~2-hour, sequential) shed viewers fast then stabilize to a small loyal core by episode 5. STEM courses (~50-min, topic-based) show selective, unit-by-unit viewing with higher per-episode completion. These two engagement patterns call for different content strategies.
+                Humanities courses (~2-hour, stories are sequential) shed viewers fast then stabilize to a small loyal core by episode 5. STEM courses (~50-min, topic-based) show selective, unit-by-unit viewing with higher per-episode completion. These two engagement patterns call for different content strategies.
               </p>
+              <div class="cs-screenshot-pair">
+                <div>
+                  <img src="ocw-chemistry-retention.png" alt="Per-episode view counts across 100+ episodes of General Chemistry, showing spikes on specific topical episodes" class="cs-screenshot" style="margin-top: 0;" />
+                  <p class="cs-screenshot-caption">STEM (General Chemistry, 100+ episodes) — a steady low baseline with visible spikes on specific topical episodes. Viewers arrive for particular units, not the full series.</p>
+                </div>
+                <div>
+                  <img src="ocw-liberalism-retention.png" alt="Per-episode view counts across 14 episodes of Liberalism, showing a smooth exponential decay from episode 1" class="cs-screenshot" style="margin-top: 0;" />
+                  <p class="cs-screenshot-caption">Humanities (Liberalism, 14 episodes) — a smooth decay from the opening episode as viewers who miss earlier context drop off. The remaining viewers stabilize into a loyal core.</p>
+                </div>
+              </div>
             </div>
           </div>
           <div class="cs-finding-item">
@@ -91,7 +123,7 @@
             <div>
               <h3>Audiences differ sharply by subject</h3>
               <p>
-                Humanities skews significantly older (<span class="cs-stat-inline">55–64</span> the largest age band, <span class="cs-stat-inline">70%</span> male); STEM skews young (<span class="cs-stat-inline">76%</span> aged 18–24, <span class="cs-stat-inline">83%</span> male). These are essentially two different products for two different users — content design and distribution should reflect that.
+                For this channel, the Humanities audience is significantly older (with the 55–64 age group being the largest. Surprisingly, students are not the primary audience), whereas the STEM audience is much younger (76% aged 18–24). These are essentially two different products for two distinct user bases, so content design and distribution should reflect that.
               </p>
             </div>
           </div>
@@ -100,7 +132,7 @@
             <div>
               <h3>Playlists are an underused growth lever</h3>
               <p>
-                Playlists account for <span class="cs-stat-inline">30–46%</span> of views. This is a major discovery path that operates independently of the algorithm, yet current content decisions largely ignore it. Optimizing playlist structure is a high-leverage, low-cost intervention.
+                Data showed that 30–46% of views come directly from playlists rather than recommendations. Based on this, I strongly recommend restructuring playlist architecture to significantly improve viewer retention at minimal cost.
               </p>
             </div>
           </div>
@@ -109,24 +141,24 @@
 
       <section class="section cs-text-section" aria-labelledby="cs-recommendation">
         <p class="section-kicker">Recommendation</p>
-        <h2 id="cs-recommendation">Measure What Actually Matters</h2>
+        <h2 id="cs-recommendation">Measures</h2>
         <div class="cs-recs-list">
           <div class="cs-rec-item">
             <h3>1 — Replace view count with an engagement-based scorecard</h3>
             <p>
-              Adopt completion rate, retention at key marks (50% / 90%), and average view percentage as the primary measures of video effectiveness. Raw view count should be treated as a discovery-reach signal only, separate from quality assessment. This reframes what a "successful" video looks like internally.
+              Adopt completion rate, retention at key marks (70% / 90%), and average view percentage as the primary measures of video effectiveness. Raw view count should be treated as a discovery-reach signal only, separate from quality assessment. This reframes what a "successful" video looks like internally.
             </p>
           </div>
           <div class="cs-rec-item">
             <h3>2 — Design content to match course-type behavior</h3>
             <p>
-              Humanities: segment long sequential lectures into shorter standalone units to reduce early drop-off and serve the older, committed audience that already self-selects for depth. STEM: lean into the topic-based structure that already works. Viewers arrive for specific units and don't expect to watch cover-to-cover.
+              Humanities: segment long sequential lectures into shorter standalone units to reduce early drop-off. STEM: lean into the topic-based structure that already works. Viewers arrive for specific units.
             </p>
           </div>
           <div class="cs-rec-item">
             <h3>3 — Invest in playlist structure as a discovery channel</h3>
             <p>
-              With 30–46% of views originating from playlists, intentional playlist curation and sequencing is a measurable growth lever. Playlists should be treated as a product surface in their own right. Ordered series, curated topic bundles, and cross-course playlists can materially improve both reach and retention.
+              With 30–46% of views originating from playlists, so organizing them well is a measurable growth lever.. Arranging videos in order, grouping them by topic, or combining different courses can boost both reach and retention.
             </p>
           </div>
         </div>
@@ -139,7 +171,7 @@
           Data was exported from the <strong>NTU OCW YouTube Analytics</strong> dashboard covering 100+ course videos. Python was used to clean, merge, and compute derived metrics (completion rate, retention at threshold marks, average view duration %). Excel was used for segmentation, pivot analysis, and visualization prototyping.
         </p>
         <p>
-          Retention curves were constructed per video by pulling audience-retention data at the 1%, 50%, 70%, and 90% playback marks. Videos were then grouped by course type (humanities vs. STEM) and audience demographic bands to surface behavioral differences. Findings were delivered to the NTU OCW academic team as a set of content-design recommendations. The proposal to retire view count as the primary KPI and replace it with the engagement scorecard is under review.
+          Analyzed video retention at the 1%, 50%, 70%, and 90% completion marks across humanities and STEM courses to identify key viewer behavior patterns by demographic. I presented content recommendations to the NTU OCW team, proposing a shift from traditional view counts to an engagement-focused scorecard, which was accepted by the team.
         </p>
 
         <ul class="skill-list" aria-label="Tools and methods" style="margin-top: 28px;">

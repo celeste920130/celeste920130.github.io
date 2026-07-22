@@ -75,10 +75,10 @@
 
         <h2 id="cs-overview">What is Smart Archie?</h2>
         <p>
-          Smart Archie is an internal AI tool built at Cathay Financial Holdings to accelerate cloud adoption across enterprise business units. As the organization embarked on a cloud migration initiative, teams needed a faster and more accessible way to translate requirements into architecture decisions, without weeks of back-and-forth between architects and business stakeholders.
+          Smart Archie is an internal AI tool for Cathay Financial Holdings to accelerate cloud migration. It was built to address two pain points: <strong>cloud migration demand outpaced a small architect team, and diagrams drawn independently across teams lacked consistency</strong>.
         </p>
         <p>
-          The tool collects requirements through structured surveys and conversational dialogue, then automatically generates cloud architecture diagrams mapped to AWS and GCP services, reducing planning cycles into a single working session.
+          The tool collects requirements through structured surveys and conversational dialogue, then <strong> automatically generates cloud architecture diagrams </strong> mapped to AWS and GCP services to ensure every output aligns with Cathay's technical policies. Planning cycles are reduced from weeks of back-and-forth into a single working session.
         </p>
         <img src="sa-editor.png" alt="Smart Archie main interface: architecture diagram editor with AI chatbot panel" class="cs-screenshot" />
         <p class="cs-screenshot-caption">The main workspace: architecture diagram on the left, AI chatbot panel on the right for iterative refinement.</p>
@@ -93,7 +93,7 @@
             <div>
               <h3>Cloud Service Research</h3>
               <p>
-                Conducted in-depth research across 45+ AWS and GCP services, documenting capabilities, pricing models, compliance certifications, and use cases relevant to financial services workloads. This became the core knowledge base powering Smart Archie's service recommendation engine.
+                Conducted in-depth research across 45+ AWS and GCP services, documenting capabilities, pricing models, and use cases relevant to financial services workloads. This became the core knowledge base for Smart Archie's service recommendation.
               </p>
             </div>
           </div>
@@ -102,7 +102,7 @@
             <div>
               <h3>Executive Cloud Adoption Report</h3>
               <p>
-                Synthesized research into a structured report for senior leadership, covering service comparisons, risk assessments, and migration sequencing recommendations. The report directly shaped internal cloud adoption priorities for the following fiscal year.
+                Synthesized research into a structured report for senior leaders, covering service comparisons, risk assessments, and migration sequencing recommendations. The report informed internal cloud adoption priorities for the following year.
               </p>
             </div>
           </div>
@@ -111,16 +111,22 @@
             <div>
               <h3>Agile Sprint Participation</h3>
               <p>
-                Joined bi-weekly Agile sprints with the cloud architecture team, contributing to backlog refinement, sprint planning, and user story definition. Maintained alignment between product requirements and technical feasibility across development cycles.
+                Joined bi-weekly Agile sprints with the cloud architecture team, contributing to feature refinement and sprint planning. Maintained alignment between product requirements and technical feasibility across development cycles.
               </p>
             </div>
           </div>
           <div class="cs-step">
             <span class="cs-step-num">04</span>
             <div>
-              <h3>UX Research & V0.4.1 Improvements</h3>
+              <h3>UX Research & Feature Prioritization</h3>
               <p>
-                Identified key pain points through usability testing and stakeholder interviews with non-technical users. Coordinated targeted UX fixes that shipped in the V0.4.1 product update, improving onboarding flow completion rates among first-time users.
+                Ran 2 weeks of depth interviews with 7 cloud architects to surface 14 core needs. Clustered by theme and scored each on business impact and feasibility.
+              </p>
+              <p style="margin-top: 12px;">
+                The team split on where to start. Some engineers wanted to fix diagram accuracy at the core generation layer; others pushed quick UX changes for faster business value. I proposed evaluating both against shared criteria (impact, effort, adoption risk), so the call could be made on data.
+              </p>
+              <p style="margin-top: 12px;">
+                The prioritized backlog directly shaped the four feature pillars that shipped in V0.4.1.
               </p>
               <img src="sa-feedback.png" alt="User interview feedback consolidation table" class="cs-screenshot" />
               <p class="cs-screenshot-caption">Consolidated user interview feedback, with requirements prioritized by module, requestor, and target version.</p>
@@ -134,34 +140,41 @@
         <h2 id="cs-features">What Smart Archie Does</h2>
         <div class="cs-features-grid">
           <div class="cs-feature-card">
-            <h3>Conversational Requirements Gathering</h3>
+            <h3>Two-Mode Entry: Guided Survey or Template Start</h3>
             <p>
-              Users describe workloads and goals in plain language. Smart Archie extracts structured technical requirements through guided dialogue, removing the dependency on specialist vocabulary.
+              Smart Archie supports two different entry modes. For PMs and non-technical stakeholders, the tool provides a Guided Mode, with a 6-module survey (cloud platform, network, compute, database, storage, diagramming tool) that walks them through structured questions until requirements are complete. Experienced architects can skip the survey and enter through Fast Mode, picking from 8 pre-built templates for common cloud scenarios (modern web, database CDC, multi-cloud, and more).
             </p>
-            <img src="sa-templates.png" alt="Smart Archie fast mode: pre-built architecture template gallery" class="cs-screenshot" />
-            <p class="cs-screenshot-caption">Fast mode offers pre-built templates for common cloud scenarios. Users who prefer to start from a familiar pattern rather than a blank survey can enter here.</p>
+            <img src="sa-mode-select.png" alt="Smart Archie mode selection: General mode vs Fast mode" class="cs-screenshot" />
+            <p class="cs-screenshot-caption">Users choose their entry mode based on intent: guided survey for a fresh design, or fast-mode templates to adapt a familiar pattern to their context.</p>
+            <div class="cs-screenshot-pair">
+              <div>
+                <img src="sa-templates.png" alt="Fast mode template gallery" class="cs-screenshot" style="margin-top: 0;" />
+                <p class="cs-screenshot-caption">Fast Mode — 8 scenario templates.</p>
+              </div>
+              <div>
+                <img src="sa-survey.png" alt="Guided mode survey step" class="cs-screenshot" style="margin-top: 0;" />
+                <p class="cs-screenshot-caption">Guided Mode — 6-module structured survey.</p>
+              </div>
+            </div>
           </div>
           <div class="cs-feature-card">
-            <h3>Survey-Based Validation</h3>
+            <h3>Automated Diagram Generation with Built-in Compliance</h3>
             <p>
-              A structured survey ensures completeness of requirements before diagram generation, systematically catching missing information that would otherwise cause revision cycles.
-            </p>
-            <img src="sa-survey.png" alt="Smart Archie general mode survey: cloud platform selection step" class="cs-screenshot" />
-          </div>
-          <div class="cs-feature-card">
-            <h3>Automated Diagram Generation</h3>
-            <p>
-              Maps validated requirements to AWS and GCP services and renders standards-compliant architecture diagrams, compressing hours of manual drafting into near-instant output.
+              Manual drafting is slow, and independent architects produce inconsistent output that can miss internal policy requirements. Smart Archie maps validated requirements to AWS and GCP services and renders diagrams with Cathay's technical policies and templates embedded, so every output follows the same enterprise standards. Prompt and generation pipelines were optimized to cut token usage by 80–90% and bring end-to-end diagram generation down to about one minute.
             </p>
             <img src="sa-diagram-gen.png" alt="Smart Archie generated cloud architecture diagram with AI chatbot panel" class="cs-screenshot" />
           </div>
           <div class="cs-feature-card">
-            <h3>Iterative Refinement</h3>
+            <h3>Chatbot-Powered In-Place Editing</h3>
             <p>
-              Teams can adjust inputs and regenerate diagrams immediately, enabling rapid exploration of multiple architecture alternatives before committing to a migration path.
+              Even a good first draft rarely lands in one shot. After generation, users refine the diagram directly through the built-in chatbot: adding a security module, swapping a service, changing icons, or restructuring layers, all through natural language. Manual edits remain available at any point, so the workflow supports true human-in-the-loop collaboration rather than a one-shot generation.
             </p>
-            <img src="sa-mode-select.png" alt="Smart Archie mode selection — General mode vs Fast mode" class="cs-screenshot" />
-            <p class="cs-screenshot-caption">Users choose their entry mode based on intent — guided survey for new requirements, or fast mode to quickly adapt an existing template to their context.</p>
+          </div>
+          <div class="cs-feature-card">
+            <h3>Version Control & Change Tracking</h3>
+            <p>
+              Cross-team communication often kept only the final diagram. When a design decision was later questioned, the reasoning was lost. Smart Archie records every diagram update with a change log, letting stakeholders view the current design and trace how requirements evolved.
+            </p>
           </div>
         </div>
       </section>
@@ -171,16 +184,16 @@
         <h2 id="cs-outcomes">Impact & Results</h2>
         <div class="cs-outcomes-grid">
           <div class="cs-outcome-card">
-            <p class="cs-stat">V0.4.1</p>
-            <p class="cs-stat-desc">Product update shipped with UX improvements targeting non-technical user onboarding flows</p>
+            <p class="cs-stat">~1 min</p>
+            <p class="cs-stat-desc">After prompt and pipeline optimization, End-to-end diagram generation time was reduced to approximately one minute.</p>
+          </div>
+          <div class="cs-outcome-card">
+            <p class="cs-stat">80–90% ↓</p>
+            <p class="cs-stat-desc">Token usage reduced through XML-based prompt restructuring and technical modularization</p>
           </div>
           <div class="cs-outcome-card">
             <p class="cs-stat">45+</p>
             <p class="cs-stat-desc">AWS and GCP services researched, documented, and structured into a reusable enterprise service library</p>
-          </div>
-          <div class="cs-outcome-card">
-            <p class="cs-stat">Weeks → Hours</p>
-            <p class="cs-stat-desc">Reduction in architecture planning cycles, from prolonged review back-and-forths to same-session diagram generation</p>
           </div>
         </div>
       </section>
@@ -227,6 +240,10 @@
             <div>
               <p class="cs-meta-label">Role</p>
               <p class="cs-meta-value">Product Management Intern</p>
+            </div>
+            <div>
+              <p class="cs-meta-label">Team</p>
+              <p class="cs-meta-value">6 interns · 2 PMs · 2 architects</p>
             </div>
             <div>
               <p class="cs-meta-label">Timeline</p>
