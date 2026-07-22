@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Job Agent – A self-hosted AI internship intelligence system. A case study by Celeste Shih." />
-    <title>Job Agent Case Study | Celeste Shih</title>
+    <meta name="description" content="Job Intelligence Agent – A self-hosted system that ingests, filters, and scores job listings through a cost-aware pipeline. A case study by Celeste Shih." />
+    <title>Job Intelligence Agent Case Study | Celeste Shih</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -180,7 +180,8 @@
       <nav class="site-nav" aria-label="Primary navigation">
         <a href="index.html#projects">Work</a>
         <a href="index.html#experience">Experience</a>
-        <a href="index.html#about">About</a>
+        <a href="index.html#education">Education</a>
+        <a href="index.html#skills">Skills</a>
         <a href="index.html#contact">Contact</a>
       </nav>
       <div class="nav-social">
@@ -204,7 +205,7 @@
         <p class="eyebrow">TypeScript · Next.js · AI · Personal Project</p>
         <h1>Job Agent</h1>
         <p class="cs-hero-subtitle">
-          A self-hosted AI system that automates PM and Data internship search, LLM scoring, and application prep — built to solve my own recruiting challenge as an international student targeting the 2027 summer cycle.
+          A self-hosted system that ingests job listings from seven sources, filters them through a cost-aware pipeline, and scores each survivor with an LLM against a structured candidate profile.
         </p>
         <div class="cs-meta-row">
           <div>
@@ -217,7 +218,7 @@
           </div>
           <div>
             <p class="cs-meta-label">Timeline</p>
-            <p class="cs-meta-value">Jul 2026 – Present</p>
+            <p class="cs-meta-value">May 2026 – Present</p>
           </div>
           <div>
             <p class="cs-meta-label">Stack</p>
@@ -234,10 +235,10 @@
           Every six hours, Job Agent pulls listings from seven sources, filters them down, and scores each survivor against my resume.
         </p>
         <p>
-          The result is a ranked board I check each morning — with per-job ATS keyword gap analysis, cover letter drafts, and a stage tracker from "prepared" to offer or rejection. One command to run; data stays local in SQLite.
+          The result is a ranked board I check each morning, with per-job ATS keyword gap analysis, cover letter drafts, and a stage tracker from "prepared" to offer or rejection. One command to run; data stays local in SQLite.
         </p>
         <img src="job-agent-board.png" alt="Job Agent dashboard showing a ranked job card with tier tag, ATS keyword gap analysis, application stage tracker, and cover letter generation" style="display: block; width: 100%; margin-top: 20px; border-radius: 8px; border: 1px solid var(--line); box-shadow: 0 8px 28px rgba(21, 32, 28, 0.1);" />
-        <p style="margin-top: 8px; font-size: 0.82rem; color: var(--muted); font-style: italic;">One job card — tier tag, ATS gap analysis, application stage tracker, and a one-click cover letter generator, all keyed to the same job ID.</p>
+        <p style="margin-top: 8px; font-size: 0.82rem; color: var(--muted); font-style: italic;">One job card: tier tag, ATS gap analysis, application stage tracker, and a one-click cover letter generator, all keyed to the same job ID.</p>
       </section>
 
       <!-- ── Problem ── -->
@@ -250,8 +251,8 @@
             <p>PM and Data internship listings are spread across Greenhouse, Lever, Workday, LinkedIn, Handshake, and curated lists. Checking all of them manually every day is unsustainable at scale.</p>
           </div>
           <div class="cs-problem-item">
-            <h3>Visa filtering</h3>
-            <p>Many listings explicitly exclude international students. Catching these early, before spending time on an application, requires careful reading of every job description, which doesn't scale.</p>
+            <h3>Eligibility rules</h3>
+            <p>Many listings carry hard eligibility constraints that disqualify a candidate before any skill assessment. Reading every job description to catch these doesn't scale, so the system encodes them as rule-based filters that run before any AI call.</p>
           </div>
           <div class="cs-problem-item">
             <h3>Relevance signal</h3>
@@ -269,7 +270,7 @@
         <p class="section-kicker">Architecture</p>
         <h2 id="cs-arch">System Data Flow</h2>
         <p style="color: var(--muted); font-size: 0.95rem; margin-bottom: 8px;">
-          Three filter stages run in order before a job reaches the dashboard. Each stage is progressively more expensive — the free regex layers eliminate most noise so the AI only scores what's genuinely relevant.
+          Three filter stages run in order before a job reaches the dashboard. Each stage is progressively more expensive. The free regex layers eliminate most noise so the AI only scores what's genuinely relevant.
         </p>
         <div class="cs-arch-wrap">
           <div class="mermaid">
@@ -284,12 +285,12 @@ flowchart LR
     subgraph FILTER["🔍 Filter Pipeline · free"]
         direction TB
         T0["Stage 0 — Title Filter\nBlocks SWE · sales · recruiter\nRequires intern + PM / DA / BA"]
-        T1["Stage 1 — Hard Filter\n13 visa exclusion patterns\nLocation · applied-company check"]
+        T1["Stage 1 — Hard Filter\nRule-based eligibility filter\nLocation · applied-company check"]
     end
 
     DEAD["🗑️ filtered_out\nreason stored"]
 
-    T2["🧠 LLM Scoring\nGemini 2.0 Flash\noverall · skillsFit\nseniorityFit · sponsorshipSignal\npros / cons / missingSkills\nIndustry ± 10–20 pts"]
+    T2["🧠 LLM Scoring\nGemini 2.0 Flash\noverall · skillsFit\nseniorityFit · eligibilitySignal\npros / cons / missingSkills\nIndustry ± 10–20 pts"]
 
     subgraph OUT["Output"]
         direction TB
@@ -310,12 +311,12 @@ flowchart LR
         <p class="section-kicker">LLM Scoring Design</p>
         <h2 id="cs-scoring">How Jobs Get Scored</h2>
         <p style="color: var(--muted); font-size: 0.95rem; margin-bottom: 24px; max-width: 720px;">
-          Each job that survives the filter pipeline is scored by Gemini 2.0 Flash — given the job description, the candidate's resume skill tags, and industry preference weights from the config file.
+          Each job that survives the filter pipeline is scored by Gemini 2.0 Flash, given the job description, the candidate's resume skill tags, and industry preference weights from the config file.
         </p>
         <div class="cs-score-row">
           <div class="cs-score-card">
             <h3>overall</h3>
-            <p>0–100 match score. Sponsorship signal carries the highest weight — a job that won't accept F-1 CPT is effectively a zero regardless of skill fit.</p>
+            <p>0–100 match score. Eligibility carries the highest weight — a role the candidate can't be considered for scores near zero regardless of skill fit.</p>
           </div>
           <div class="cs-score-card">
             <h3>skillsFit</h3>
@@ -326,8 +327,8 @@ flowchart LR
             <p>100 = designed for interns, 0 = requires senior experience. Catches roles labeled "intern" but scoped for 3+ years.</p>
           </div>
           <div class="cs-score-card">
-            <h3>sponsorshipSignal</h3>
-            <p><code>likely_yes</code> / <code>likely_no</code> / <code>unclear</code> based on visa language in the JD.</p>
+            <h3>eligibilitySignal</h3>
+            <p><code>likely_yes</code> / <code>likely_no</code> / <code>unclear</code>, inferred from eligibility language in the JD.</p>
           </div>
           <div class="cs-score-card">
             <h3>pros / cons</h3>
@@ -335,11 +336,11 @@ flowchart LR
           </div>
           <div class="cs-score-card">
             <h3>missingSkills</h3>
-            <p>Skills the JD requires that aren't in the resume bullet pool — used to identify gaps before applying.</p>
+            <p>Skills the JD requires that aren't in the resume bullet pool. Used to identify gaps before applying.</p>
           </div>
         </div>
         <div class="cs-callout">
-          Industry preferences (priority industries like Consumer Software and AI/ML, excluded industries like Defense and Crypto) are injected into the scoring prompt as explicit weighting instructions (+10–15 or −10–20 pts) — kept in a config file the user controls, not hardcoded.
+          Industry preferences (priority industries like Consumer Software and AI/ML, excluded industries like Defense and Crypto) are injected into the scoring prompt as explicit weighting instructions (+10–15 or −10–20 pts). These weights live in a config file the user can edit at any time, instead of being baked into the model prompt.
         </div>
       </section>
 
@@ -353,7 +354,7 @@ flowchart LR
             <span class="cs-step-num">01</span>
             <div>
               <h3>Free regex layers before any AI call</h3>
-              <p>Each sync can return hundreds of raw listings — mostly SWE, sales, or full-time roles. Sending everything to an LLM would exhaust quota immediately. Two free stages run first:</p>
+              <p>Each sync can return hundreds of raw listings: mostly SWE, sales, or full-time roles. Sending everything to an LLM would exhaust quota immediately. Two free stages run first:</p>
               <div class="cs-filter-stages" style="margin-top: 14px;">
                 <div class="cs-filter-stage">
                   <span class="cs-filter-badge badge-free">Free</span>
@@ -366,7 +367,7 @@ flowchart LR
                   <span class="cs-filter-badge badge-free">Free</span>
                   <div>
                     <h3>Stage 1 — Hard Filter</h3>
-                    <p>Checks 13 sponsorship exclusion patterns, preferred locations, and companies already applied to. Failed jobs are marked <code>filtered_out</code> with a stored reason.</p>
+                    <p>Checks rule-based eligibility patterns, preferred locations, and companies already applied to. Failed jobs are marked <code>filtered_out</code> with a stored reason.</p>
                   </div>
                 </div>
                 <div class="cs-filter-stage">
@@ -384,7 +385,7 @@ flowchart LR
             <span class="cs-step-num">02</span>
             <div>
               <h3>Verification pass to prevent hallucination</h3>
-              <p>Any generated draft goes through a second verification pass — every claim is checked against the source resume bullet pool. Sentences that can't be traced back to a real bullet are automatically removed, with the count flagged in the UI.</p>
+              <p>Any generated draft goes through a second verification pass. Every claim is checked against the source resume bullet pool. Sentences that can't be traced back to a real bullet are automatically removed, with the count flagged in the UI.</p>
             </div>
           </div>
 

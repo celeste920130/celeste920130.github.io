@@ -108,7 +108,8 @@
       <nav class="site-nav" aria-label="Primary navigation">
         <a href="index.html#projects">Work</a>
         <a href="index.html#experience">Experience</a>
-        <a href="index.html#about">About</a>
+        <a href="index.html#education">Education</a>
+        <a href="index.html#skills">Skills</a>
         <a href="index.html#contact">Contact</a>
       </nav>
       <div class="nav-social">
@@ -132,7 +133,7 @@
         <p class="eyebrow">Python · Gemini Vision · Personal Project</p>
         <h1>Competitor Price Tracker</h1>
         <p class="cs-hero-subtitle">
-          A screenshot-in, table-out tool that turns competitor product pages into structured pricing data — built to replace hours of manual model-by-model comparison during category subsidy planning.
+          A screenshot-in, table-out tool that turns competitor product pages into structured pricing data. It replaces hours of manual model-by-model comparison during category subsidy planning.
         </p>
         <div class="cs-meta-row">
           <div>
@@ -145,7 +146,7 @@
           </div>
           <div>
             <p class="cs-meta-label">Timeline</p>
-            <p class="cs-meta-value">Jul 2026</p>
+            <p class="cs-meta-value">Jun 2026 – Jul 2026</p>
           </div>
           <div>
             <p class="cs-meta-label">Stack</p>
@@ -174,7 +175,7 @@
           A single brand carries dozens of overlapping SKUs — same model number in bare-tool, single-battery, dual-battery, and kit variants, each with its own price point. Comparing one competitor across even a narrow segment meant opening 30–50 product pages, copying model numbers into a spreadsheet, and hand-typing prices for each variant.
         </p>
         <p>
-          The failure mode was not the individual screenshot — it was doing it at scale, weekly. Once the volume crosses a threshold, transcription errors creep in, prices go stale between refreshes, and the analyst starts making decisions from an outdated sheet. The tool exists to remove that transcription step entirely.
+          The failure mode was not the individual screenshot. It was doing it at scale, weekly. Once the volume crosses a threshold, transcription errors creep in, prices go stale between refreshes, and the analyst starts making decisions from an outdated sheet. The tool exists to remove that transcription step entirely.
         </p>
       </section>
 
@@ -183,7 +184,7 @@
         <p class="section-kicker">Architecture</p>
         <h2 id="cs-arch">How It Works</h2>
         <p style="color: var(--muted); font-size: 0.95rem; margin-bottom: 8px;">
-          One user action — drop screenshots into the browser — triggers a four-stage pipeline. Each screenshot flows through vision extraction, normalization, and storage before showing up in the comparison table.
+          The user drops screenshots into the browser and a four-stage pipeline handles the rest. Each screenshot flows through vision extraction, normalization, and storage before showing up in the comparison table.
         </p>
         <div class="cs-arch-wrap">
           <div class="mermaid">
@@ -214,7 +215,7 @@ flowchart LR
           </div>
         </div>
         <img src="price-compare-ui.png" alt="Price Compare Assistant upload screen with drag-and-drop area" class="cs-screenshot" />
-        <p class="cs-screenshot-caption">The upload page — one drop zone, five tabs, and a badge showing the active Gemini model.</p>
+        <p class="cs-screenshot-caption">The upload page: one drop zone, five tabs, and a badge showing the active Gemini model.</p>
       </section>
 
       <!-- ── Key Design Decisions ── -->
@@ -228,10 +229,10 @@ flowchart LR
             <div>
               <h3>A vision model, not OCR</h3>
               <p>
-                OCR can read the pixels off a product page — but reading the text and understanding the layout are different problems. On a real listing, "M18FID3" and "NT$8,990" are just two strings on a canvas; nothing in the raw text tells a downstream system which string is the model number and which is the current sale price (as opposed to the crossed-out MSRP or a sibling variant).
+                OCR can read the pixels off a product page. Reading the text and understanding the layout are different problems. On a real listing, "M18FID3" and "NT$8,990" are just two strings on a canvas; nothing in the raw text tells a downstream system which string is the model number and which is the current sale price (as opposed to the crossed-out MSRP or a sibling variant).
               </p>
               <p style="margin-top: 12px;">
-                The prompt handed to Gemini Vision does that assignment explicitly. It defines three page archetypes ("price-table style" for momo, "button-select style" for Shopee where only the highlighted variant's price is valid, and "no variants"), and instructs the model on how many rows to return for each case. The output is a JSON array with a fixed 15-field schema — platform, brand, model, normalized model, variant, variant key, full title, price, currency, specs, official-import flag, confidence, and notes — so the parsing step downstream can be strict rather than heuristic.
+                The prompt handed to Gemini Vision does that assignment explicitly. It defines three page archetypes ("price-table style" for momo, "button-select style" for Shopee where only the highlighted variant's price is valid, and "no variants"), and instructs the model on how many rows to return for each case. The output is a JSON array with a fixed 15-field schema: platform, brand, model, normalized model, variant, variant key, full title, price, currency, specs, official-import flag, confidence, and notes. That structure lets the parsing step downstream be strict rather than heuristic.
               </p>
               <p style="margin-top: 12px;">
                 What OCR-plus-regex would have needed: a per-site parser, updated every time the layout shifts. The vision model absorbs that instability.
@@ -242,12 +243,12 @@ flowchart LR
           <div class="cs-step">
             <span class="cs-step-num">02</span>
             <div>
-              <h3>Screenshot upload is the workflow, not a fallback</h3>
+              <h3>Screenshot upload as the primary workflow</h3>
               <p>
                 The obvious question is why the tool doesn't just scrape the competitor site directly. The answer is that "just scrape" isn't available: the target site's anti-bot measures make automated collection unreliable at best and against terms of service at worst. Building around that constraint — rather than fighting it — kept the project small, legal, and dependable.
               </p>
               <p style="margin-top: 12px;">
-                A useful side effect: the screenshot workflow works on any e-commerce site, not just the ones I've written custom parsers for. When the category expanded from power tools to another vertical, no code changed — the analyst just dropped in different screenshots.
+                A useful side effect: the screenshot workflow generalizes to any e-commerce site without any site-specific parser. When the category expanded from power tools to another vertical, no code changed. The analyst just dropped in different screenshots.
               </p>
             </div>
           </div>
@@ -255,15 +256,15 @@ flowchart LR
           <div class="cs-step">
             <span class="cs-step-num">03</span>
             <div>
-              <h3>CSV output, not a locked-in dashboard</h3>
+              <h3>CSV output for downstream analysis</h3>
               <p>
-                The tool ends at "structured, comparable data" — it deliberately doesn't try to be the analyst's final workspace. Category strategy work always lives in a spreadsheet: subsidy calculations, margin models, cross-referencing against internal sales data. Forcing that back into a bespoke UI would just add friction.
+                The tool ends at "structured, comparable data." It deliberately doesn't try to be the analyst's final workspace. Category strategy work always lives in a spreadsheet: subsidy calculations, margin models, cross-referencing against internal sales data. Forcing that back into a bespoke UI would just add friction.
               </p>
               <p style="margin-top: 12px;">
-                Every comparison view is one-click exportable to CSV with a UTF-8 BOM so Excel opens it in Chinese without mojibake. The tool's job is to be the fastest step in someone else's analytical process, not to replace it.
+                Every comparison view is one-click exportable to CSV with a UTF-8 BOM so Excel opens it in Chinese without mojibake. The tool's job is to be the fastest step in someone else's analytical process. Downstream analysis stays where it already lives.
               </p>
               <img src="price-compare-table.png" alt="Compare table grouping model IDs across platforms with Shopee and momo prices, difference, and confidence" class="cs-screenshot" />
-              <p class="cs-screenshot-caption">The compare table — one row per (model + variant), platforms as columns, difference and subsidy needed inline. Export to CSV lives in the top-right.</p>
+              <p class="cs-screenshot-caption">The compare table: one row per (model + variant), platforms as columns, with difference and subsidy needed inline. Export to CSV lives in the top-right.</p>
             </div>
           </div>
         </div>
@@ -279,7 +280,7 @@ flowchart LR
         <div class="cs-score-row">
           <div class="cs-score-card">
             <h3>page_type</h3>
-            <p>The model first classifies the layout — price-table (all variants priced) vs button-select (only the highlighted one is priced) vs no-variants. This decides row count.</p>
+            <p>The model first classifies the layout: price-table (all variants priced), button-select (only the highlighted one is priced), or no-variants. This decides row count.</p>
           </div>
           <div class="cs-score-card">
             <h3>model_id</h3>
@@ -287,11 +288,11 @@ flowchart LR
           </div>
           <div class="cs-score-card">
             <h3>model_id_normalized</h3>
-            <p>Uppercased, stripped of spaces and punctuation — "M18FID3". This is the key used to group across platforms.</p>
+            <p>Uppercased, stripped of spaces and punctuation (e.g., "M18FID3"). This is the key used to group across platforms.</p>
           </div>
           <div class="cs-score-card">
             <h3>variant_key</h3>
-            <p>Canonical form for battery configuration — 裸機, 單2.0, 雙5.0, 2.5+5.0. Prevents "single battery" and "1-battery kit" from being treated as different variants.</p>
+            <p>Canonical form for battery configuration: 裸機, 單2.0, 雙5.0, 2.5+5.0. Prevents "single battery" and "1-battery kit" from being treated as different variants.</p>
           </div>
           <div class="cs-score-card">
             <h3>price</h3>
@@ -306,7 +307,7 @@ flowchart LR
           Every response is validated as JSON before hitting the database. If Gemini returns markdown-wrapped JSON, the parser strips the wrapper; if the response is still invalid, the pipeline retries the same image once. On the second failure, the row is stored with a <code>parse_error</code> flag so it appears in the UI as "needs manual entry" — never silently dropped.
         </div>
         <img src="price-compare-raw.png" alt="Raw extraction table showing model, variant, price, and confidence score for each screenshot" class="cs-screenshot" />
-        <p class="cs-screenshot-caption">Every row after extraction — platform, brand, model, variant, price, and a confidence score. Anything below ~90% is an obvious review candidate.</p>
+        <p class="cs-screenshot-caption">Every row after extraction: platform, brand, model, variant, price, and a confidence score. Anything below ~90% is an obvious review candidate.</p>
       </section>
 
       <!-- ── Limitations ── -->
@@ -318,7 +319,7 @@ flowchart LR
             <span class="cs-step-num">01</span>
             <div>
               <h3>Screenshot quality is a hard floor</h3>
-              <p>Low-resolution or partially cropped screenshots — where the price element got cut off, or the variant label is behind a hover state — produce either wrong extractions or low-confidence rows that need manual fixing. The tool surfaces confidence scores so bad rows are visible, but it can't recover data that wasn't in the image.</p>
+              <p>Low-resolution or partially cropped screenshots (where the price element got cut off, or the variant label is behind a hover state) produce either wrong extractions or low-confidence rows that need manual fixing. The tool surfaces confidence scores so bad rows are visible, but it can't recover data that wasn't in the image.</p>
             </div>
           </div>
           <div class="cs-step">
@@ -339,7 +340,7 @@ flowchart LR
             <span class="cs-step-num">04</span>
             <div>
               <h3>The tool is not a real-time price monitor</h3>
-              <p>Because it depends on manually captured screenshots, prices are only as fresh as the last upload. It's a decision-support tool for weekly subsidy planning, not an alerting system for flash sales.</p>
+              <p>Because it depends on manually captured screenshots, prices are only as fresh as the last upload. It's built for weekly subsidy planning; real-time flash-sale monitoring is out of scope.</p>
             </div>
           </div>
         </div>
