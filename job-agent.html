@@ -5,6 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Job Intelligence Agent – A self-hosted system that ingests, filters, and scores job listings through a cost-aware pipeline. A case study by Celeste Shih." />
     <title>Job Intelligence Agent Case Study | Celeste Shih</title>
+
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://celeste920130.github.io/job-agent.html" />
+    <meta property="og:title" content="Job Intelligence Agent | Celeste Shih" />
+    <meta property="og:description" content="A self-hosted system that pulls job listings from seven sources, runs them through a cost-aware filter pipeline, and scores each survivor with an LLM." />
+    <meta property="og:image" content="https://celeste920130.github.io/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Job Intelligence Agent | Celeste Shih" />
+    <meta name="twitter:description" content="Seven sources, cost-aware filter pipeline, LLM scoring against a structured candidate profile." />
+    <meta name="twitter:image" content="https://celeste920130.github.io/og-image.png" />
+
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#123b79" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -211,10 +231,7 @@
       <section class="section cs-text-section" aria-labelledby="cs-overview">
         <h2 id="cs-overview">What is Job Intelligence Agent?</h2>
         <p>
-          A self-hosted system that ingests job listings from seven sources, filters them through a cost-aware pipeline, and scores each survivor with an LLM against a structured candidate profile.
-        </p>
-        <p>
-          Every six hours, Job Agent pulls listings from seven sources, filters them down, and scores each survivor against my resume. The result is a ranked board I check each morning, with per-job ATS keyword gap analysis and a stage tracker. One command to run.
+          A self-hosted system that pulls job listings from seven sources every six hours, runs them through a cost-aware filter pipeline, and scores each survivor with an LLM against a structured candidate profile. The result is a ranked board I check each morning, with per-job ATS keyword gap analysis and an application stage tracker. One command to run.
         </p>
         <img src="job-agent-board.png" alt="Job Agent dashboard showing a ranked job card with tier tag, ATS keyword gap analysis, application stage tracker, and cover letter generation" style="display: block; width: 100%; margin-top: 20px; border-radius: 8px; border: 1px solid var(--line); box-shadow: 0 8px 28px rgba(21, 32, 28, 0.1);" />
         <p style="margin-top: 8px; font-size: 0.82rem; color: var(--muted); font-style: italic;">One job card: tier tag, ATS gap analysis, application stage tracker, and a one-click cover letter generator, all keyed to the same job ID.</p>
