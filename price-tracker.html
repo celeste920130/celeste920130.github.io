@@ -160,12 +160,12 @@
 
       <!-- ── The Constraint ── -->
       <section class="section cs-text-section" aria-labelledby="cs-constraint">
-        <h2 id="cs-constraint">Competitor sites block scrapers, so pricing data only exists as screenshots.</h2>
+        <h2 id="cs-constraint">Problems I faced</h2>
         <p>
-          During my time in category management at Shopee, one recurring task was benchmarking competitor prices for power tools before setting subsidy strategy. The competitor's site actively blocks automated requests — no public API, no scrapable listing pages, and the anti-bot layer flags anything that isn't a real browser session. The only sanctioned way to see a price was to open the page yourself and take a screenshot.
+          During my time in category management at Shopee, one recurring task was benchmarking competitor prices for power tools before setting subsidy strategy. The competitor's site actively blocks automated requests, no public API and the anti-bot layer flags anything that isn't a real browser session. The only way to see a price was to open the page yourself and take a screenshot.
         </p>
         <p>
-          That constraint framed the entire tool. Instead of trying to fight the block, the workflow accepts screenshots as the source of truth and moves the labor problem to the next step: extracting structured data from them.
+          So that constraint framed the entire tool. Instead of trying to fight the block, the workflow accepts screenshots as the source of truth and moves the labor problem to the next step: extracting structured data from them.
         </p>
       </section>
 
@@ -174,7 +174,7 @@
         <p class="section-kicker">Why It Was Worth Building</p>
         <h2 id="cs-why">Power tools are a long-tail SKU category.</h2>
         <p>
-          A single brand carries dozens of overlapping SKUs — same model number in bare-tool, single-battery, dual-battery, and kit variants, each with its own price point. Comparing one competitor across even a narrow segment meant opening 30–50 product pages, copying model numbers into a spreadsheet, and hand-typing prices for each variant.
+          A single brand carries dozens of overlapping SKUs. Same model number in bare-tool, single-battery, dual-battery, and kit variants, each with its own price. Comparing one competitor across even a narrow segment meant opening 30–50 product pages, copying model numbers into a spreadsheet, and hand-typing prices for each variant.
         </p>
         <p>
           The failure mode was not the individual screenshot. It was doing it at scale, weekly. Once the volume crosses a threshold, transcription errors creep in, prices go stale between refreshes, and the analyst starts making decisions from an outdated sheet. The tool exists to remove that transcription step entirely.
@@ -231,10 +231,10 @@ flowchart LR
             <div>
               <h3>A vision model, not OCR</h3>
               <p>
-                OCR can read the pixels off a product page. Reading the text and understanding the layout are different problems. On a real listing, "M18FID3" and "NT$8,990" are just two strings on a canvas; nothing in the raw text tells a downstream system which string is the model number and which is the current sale price (as opposed to the crossed-out MSRP or a sibling variant).
+                OCR can read the pixels off a product page. Reading the text and understanding the layout are different problems. On a real listing, "M18FID3" and "NT$8,990" are just two strings on a canvas; nothing in the raw text tells a downstream system which string is the model number and which is the current sale price.
               </p>
               <p style="margin-top: 12px;">
-                The prompt handed to Gemini Vision does that assignment explicitly. It defines three page archetypes ("price-table style" for momo, "button-select style" for Shopee where only the highlighted variant's price is valid, and "no variants"), and instructs the model on how many rows to return for each case. The output is a JSON array with a fixed 15-field schema: platform, brand, model, normalized model, variant, variant key, full title, price, currency, specs, official-import flag, confidence, and notes. That structure lets the parsing step downstream be strict rather than heuristic.
+                The prompt handed to Gemini Vision does that assignment explicitly. It defines three page archetypes ("price-table style" for momo, "button-select style" for Shopee where only the highlighted variant's price is valid, and "no variants"), and instructs the model on how many rows to return for each case. The output is a JSON array with a fixed 15-field schema: platform, brand, model, normalized model, variant, variant key, full title, price, currency, specs, official-import flag, confidence, and notes.
               </p>
               <p style="margin-top: 12px;">
                 What OCR-plus-regex would have needed: a per-site parser, updated every time the layout shifts. The vision model absorbs that instability.
@@ -247,7 +247,7 @@ flowchart LR
             <div>
               <h3>Screenshot upload as the primary workflow</h3>
               <p>
-                The obvious question is why the tool doesn't just scrape the competitor site directly. The answer is that "just scrape" isn't available: the target site's anti-bot measures make automated collection unreliable at best and against terms of service at worst. Building around that constraint — rather than fighting it — kept the project small, legal, and dependable.
+                The obvious question is why the tool doesn't just scrape the competitor site directly. The answer is that "scrape" isn't available: the target site's anti-bot measures make automated collection unreliable.
               </p>
               <p style="margin-top: 12px;">
                 A useful side effect: the screenshot workflow generalizes to any e-commerce site without any site-specific parser. When the category expanded from power tools to another vertical, no code changed. The analyst just dropped in different screenshots.
@@ -260,7 +260,7 @@ flowchart LR
             <div>
               <h3>CSV output for downstream analysis</h3>
               <p>
-                The tool ends at "structured, comparable data." It deliberately doesn't try to be the analyst's final workspace. Category strategy work always lives in a spreadsheet: subsidy calculations, margin models, cross-referencing against internal sales data. Forcing that back into a bespoke UI would just add friction.
+                The tool ends at "structured, comparable data." It deliberately doesn't try to be the analyst's final workspace. Category strategy work always lives in a spreadsheet: subsidy calculations and margin models against internal sales data.
               </p>
               <p style="margin-top: 12px;">
                 Every comparison view is one-click exportable to CSV with a UTF-8 BOM so Excel opens it in Chinese without mojibake. The tool's job is to be the fastest step in someone else's analytical process. Downstream analysis stays where it already lives.
@@ -319,9 +319,9 @@ flowchart LR
         <div class="cs-steps">
           <div class="cs-step">
             <span class="cs-step-num">01</span>
-            <div>
-              <h3>Screenshot quality is a hard floor</h3>
-              <p>Low-resolution or partially cropped screenshots (where the price element got cut off, or the variant label is behind a hover state) produce either wrong extractions or low-confidence rows that need manual fixing. The tool surfaces confidence scores so bad rows are visible, but it can't recover data that wasn't in the image.</p>
+              <div>
+              <h3>The tool is not a real-time price monitor</h3>
+              <p>Because it depends on manually captured screenshots, prices are only as fresh as the last upload. It's built for weekly subsidy planning; real-time flash-sale monitoring is out of scope.</p>
             </div>
           </div>
           <div class="cs-step">
@@ -329,20 +329,6 @@ flowchart LR
             <div>
               <h3>Non-standard layouts still slip through</h3>
               <p>The three page-type archetypes cover Shopee, momo, and most Amazon listings well. Independent brand sites with heavily custom layouts (long-scroll pages, spec tables mixed with marketing copy) sometimes get parsed as the wrong archetype. When this happens the row lands with a low confidence score and a note flagging the ambiguity.</p>
-            </div>
-          </div>
-          <div class="cs-step">
-            <span class="cs-step-num">03</span>
-            <div>
-              <h3>Cross-platform matching relies on the model number being visible</h3>
-              <p>Comparison rows are keyed on <code>model_id_normalized</code>. If a listing hides the model in an image (common for generic no-name products), it won't group with matching listings from other platforms. This is by design — silent fuzzy matching would be worse than no match — but it means unbranded SKUs need manual reconciliation.</p>
-            </div>
-          </div>
-          <div class="cs-step">
-            <span class="cs-step-num">04</span>
-            <div>
-              <h3>The tool is not a real-time price monitor</h3>
-              <p>Because it depends on manually captured screenshots, prices are only as fresh as the last upload. It's built for weekly subsidy planning; real-time flash-sale monitoring is out of scope.</p>
             </div>
           </div>
         </div>
