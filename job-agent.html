@@ -231,7 +231,10 @@
       <section class="section cs-text-section" aria-labelledby="cs-overview">
         <h2 id="cs-overview">What is Job Intelligence Agent?</h2>
         <p>
-          A self-hosted system that pulls job listings from seven sources every six hours, runs them through a cost-aware filter pipeline, and scores each survivor with an LLM against a structured candidate profile. The result is a ranked board I check each morning, with per-job ATS keyword gap analysis and an application stage tracker. One command to run.
+          I was spending 30+ minutes a day manually checking internship listings across Greenhouse, Handshake, LinkedIn, and a few curated lists, and most of what I found wasn't relevant.
+        </p>
+        <p style="margin-top: 12px;">
+          So I built an agent that pulls from 6 sources every 6 hours, filters out roles that don't fit (wrong title, wrong location, wrong year), and scores what's left with an LLM. I defined the ranking criteria( role fit, location, sponsorship signal, industry preference), and validated the output by spot-checking results and adjusting the filter logic. Each morning I open a ranked dashboard that sent to my email, saved 30+ min of daily search.
         </p>
         <img src="job-agent-board.png" alt="Job Agent dashboard showing a ranked job card with tier tag, ATS keyword gap analysis, application stage tracker, and cover letter generation" style="display: block; width: 100%; margin-top: 20px; border-radius: 8px; border: 1px solid var(--line); box-shadow: 0 8px 28px rgba(21, 32, 28, 0.1);" />
         <p style="margin-top: 8px; font-size: 0.82rem; color: var(--muted); font-style: italic;">One job card: tier tag, ATS gap analysis, application stage tracker, and a one-click cover letter generator, all keyed to the same job ID.</p>
