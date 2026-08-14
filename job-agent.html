@@ -338,6 +338,8 @@ flowchart LR
             <p>Skills the JD requires that aren't in the resume bullet pool. Used to identify gaps before applying.</p>
           </div>
         </div>
+        <img src="job-agent-scoring-card.png" alt="Job scoring card showing overall 62, skillsFit 75, seniorityFit 85 for American Express Product Management Intern NYC, with advantages and shortcomings listed" style="display: block; width: 100%; max-width: 720px; margin-top: 24px; border-radius: 8px; border: 1px solid var(--line); box-shadow: 0 8px 28px rgba(21, 32, 28, 0.1);" />
+        <p style="margin-top: 8px; font-size: 0.82rem; color: var(--muted); font-style: italic;">A scored job card: overall / skillsFit / seniorityFit scores, sponsorship signal, and plain-language pros and cons surfaced for quick triage.</p>
         <div class="cs-callout">
           Industry preferences (priority industries like Consumer Software and AI/ML, excluded industries like Defense and Crypto) are injected into the scoring prompt as explicit weighting instructions (+10–15 or −10–20 pts). These weights live in a config file the user can edit at any time, instead of being baked into the model prompt.
         </div>
@@ -394,6 +396,8 @@ flowchart LR
               <h3>No auto-apply — system prepares to 100%, user clicks Apply</h3>
               <p>The system generates a cover letter, surfaces resume bullets to highlight, runs ATS keyword gap analysis, and pre-fills form answers. It does not submit anything.</p>
               <p style="margin-top: 12px;">The boundary is enforced in the data model: <code>Application.stage</code> is only updated manually through the UI. The apply URL is surfaced as a button the user clicks themselves. The value is in preparation quality, not in removing the human decision.</p>
+              <img src="job-agent-ats-comparison.png" alt="ATS Keyword Comparison panel showing suggested keywords to add (Analytics, Roadmapping, Competitive Analysis) and covered skills already present in the resume (Python, SQL, Excel, AWS, GCP, A/B Testing, Data Visualization)" style="display: block; width: 100%; max-width: 720px; margin-top: 20px; border-radius: 8px; border: 1px solid var(--line); box-shadow: 0 8px 28px rgba(21, 32, 28, 0.1);" />
+              <p style="margin-top: 8px; font-size: 0.82rem; color: var(--muted); font-style: italic;">ATS Keyword Comparison panel: skills already covered in the resume vs. keywords the JD emphasises that are missing — so the candidate knows exactly what to address before clicking Apply.</p>
             </div>
           </div>
         </div>
