@@ -326,12 +326,12 @@ flowchart LR
             <p>100 = designed for interns, 0 = requires senior experience. Catches roles labeled "intern" but scoped for 3+ years.</p>
           </div>
           <div class="cs-score-card">
-            <h3>eligibilitySignal</h3>
-            <p><code>likely_yes</code> / <code>likely_no</code> / <code>unclear</code>, inferred from eligibility language in the JD.</p>
+            <h3>industryWeights</h3>
+            <p>Priority industries like Consumer Software and AI/ML get +10–15 pts; excluded industries like Defense and Crypto get −10–20 pts, injected as explicit instructions into the scoring prompt.</p>
           </div>
           <div class="cs-score-card">
-            <h3>pros / cons</h3>
-            <p>Plain-language reasons for and against the match, surfaced in the job card for quick triage.</p>
+            <h3>configDriven</h3>
+            <p>Weights live in a config file the user can edit at any time — not baked into the model prompt.</p>
           </div>
           <div class="cs-score-card">
             <h3>missingSkills</h3>
@@ -340,9 +340,6 @@ flowchart LR
         </div>
         <img src="job-agent-scoring-card.png" alt="Job scoring card showing overall 62, skillsFit 75, seniorityFit 85 for American Express Product Management Intern NYC, with advantages and shortcomings listed" style="display: block; width: 100%; max-width: 720px; margin-top: 24px; border-radius: 8px; border: 1px solid var(--line); box-shadow: 0 8px 28px rgba(21, 32, 28, 0.1);" />
         <p style="margin-top: 8px; font-size: 0.82rem; color: var(--muted); font-style: italic;">A scored job card: overall / skillsFit / seniorityFit scores, sponsorship signal, and plain-language pros and cons surfaced for quick triage.</p>
-        <div class="cs-callout">
-          Industry preferences (priority industries like Consumer Software and AI/ML, excluded industries like Defense and Crypto) are injected into the scoring prompt as explicit weighting instructions (+10–15 or −10–20 pts). These weights live in a config file the user can edit at any time, instead of being baked into the model prompt.
-        </div>
       </section>
 
       <!-- ── Key Decisions ── -->
